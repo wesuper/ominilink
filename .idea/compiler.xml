@@ -24,10 +24,10 @@
       <module name="ai-mcp-github" options="-parameters" />
       <module name="ai-mdp-sqlite" options="-parameters" />
       <module name="ai-mdp-sqlite-chatbot" options="-parameters" />
-      <module name="ominilink" options="-parameters" />
-      <module name="ominilink-flywise" options="-parameters" />
-      <module name="ominilink-flywise-stock" options="-parameters" />
-      <module name="ominilink-flywise-weather" options="-parameters" />
+      <module name="ominilink" options="" />
+      <module name="ominilink-flywise" options="" />
+      <module name="ominilink-flywise-stock" options="" />
+      <module name="ominilink-flywise-weather" options="" />
       <module name="spring-ai-alibaba-manul-mcp-example" options="-parameters" />
     </option>
   </component>
