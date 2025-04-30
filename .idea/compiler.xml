@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ai-mcp-fileserver" />
+        <module name="ai-mdp-sqlite-chatbot" />
+        <module name="ai-mcp-github" />
+        <module name="ominilink-flywise-stock" />
+        <module name="ominilink-flywise-weather" />
+        <module name="ai-mdp-sqlite" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="spring-ai-alibaba-manul-mcp-example" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ai-mcp-fileserver" options="-parameters" />
+      <module name="ai-mcp-github" options="-parameters" />
+      <module name="ai-mdp-sqlite" options="-parameters" />
+      <module name="ai-mdp-sqlite-chatbot" options="-parameters" />
+      <module name="ominilink" options="-parameters" />
+      <module name="ominilink-flywise" options="-parameters" />
+      <module name="ominilink-flywise-stock" options="-parameters" />
+      <module name="ominilink-flywise-weather" options="-parameters" />
+      <module name="spring-ai-alibaba-manul-mcp-example" options="-parameters" />
+    </option>
+  </component>
+</project>
