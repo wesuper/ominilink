@@ -25,7 +25,6 @@ hs_err_pid*
 replay_pid*
 
 ### Maven template
-ominilink-bridge/ominilink-bridge-javaseeker/target/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -36,6 +35,10 @@ buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
+.flattened-pom.xml
+
+**/target/
+!src/**/target/
 
 # Eclipse m2e generated files
 # Eclipse Core

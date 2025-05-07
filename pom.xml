@@ -9,7 +9,7 @@
 	<version>${revision}</version>
 	<packaging>pom</packaging>
 
-	<description>omnilink - the omoni mcp server links AI agents to evertthing. Powered by Spring AI Alibaba.</description>
+	<description>omnilink - the omoni mcp server links AI agents to everything. Powered by Spring AI Alibaba.</description>
 	<name>ominilink</name>
 	<url>https://github.com/wesuper/ominilink</url>
 
@@ -39,8 +39,10 @@
 	</properties>
 
 	<modules>
-		<module>manul-example</module>
+		<module>ominilink-bridge</module>
 		<module>ominilink-flywise</module>
+<!--		<module>ominilink-regsvr</module>-->
+<!--		<module>ominilink-manual-sample</module>-->
 	</modules>
 
 	<dependencyManagement>

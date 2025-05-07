@@ -3,16 +3,40 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/manul-example/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/manul-example/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/omini-regsvr/ominilink-regsvr-nacos/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/omini-regsvr/ominilink-regsvr-nacos/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/omini-regsvr/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/omini-regsvr/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-bridge/ominilink-bridge-javaseeker/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-bridge/ominilink-bridge-javaseeker/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-bridge/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-bridge/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ominilink-flywise/ominilink-flywise-stock/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ominilink-flywise/ominilink-flywise-stock/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ominilink-flywise/ominilink-flywise-weather/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ominilink-flywise/ominilink-flywise-weather/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ominilink-flywise/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ominilink-flywise/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/filesystem/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/github/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/sqlite/chatbot/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/sqlite/simple/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/mcp-filesystem/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/mcp-filesystem/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/mcp-github/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/mcp-github/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/mcp-javaseeker-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/mcp-javaseeker-client/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/mcp-stock-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/mcp-stock-client/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/mcp-weather-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/mcp-weather-client/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/sqlite/mcp-sqlite/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/sqlite/mcp-sqlite/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/sqlite/mdp-sqlite-chatbot/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/sqlite/mdp-sqlite-chatbot/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-manual-sample/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-regsvr/ominilink-regsvr-nacos/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-regsvr/ominilink-regsvr-nacos/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-regsvr/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ominilink-regsvr/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>

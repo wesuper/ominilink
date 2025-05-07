@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.wesuper.ailite</groupId>
@@ -13,7 +13,7 @@
     <artifactId>ominilink-bridge-javaseeker</artifactId>
     <version>${revision}</version>
 
-    <name>${artifactId}</name>
+    <name>${project.artifactId}</name>
     <description>Sample Spring Boot application demonstrating MCP stdio server usage</description>
 
     <properties>
@@ -24,7 +24,7 @@
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-mcp-server-spring-boot-starter</artifactId>
-<!--            <version>${spring-ai.version}</version>-->
+            <version>${spring-ai.version}</version>
         </dependency>
 
         <dependency>

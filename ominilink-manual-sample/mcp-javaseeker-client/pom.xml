@@ -6,10 +6,10 @@
 	<parent>
 		<groupId>org.wesuper.ailite</groupId>
 		<version>${revision}</version>
-		<artifactId>spring-ai-alibaba-mcp-starter-example</artifactId>
-		<relativePath>../../pom.xml</relativePath>
+		<artifactId>ominilink-manual-sample</artifactId>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>mcp-stdio-client-exmaple</artifactId>
+	<artifactId>mcp-javaseeker-client</artifactId>
 	<version>${revision}</version>
 	<name>Spring AI - MCP STDIO Client EXAMPLE</name>
 
@@ -23,8 +23,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.wesuper.ailite</groupId>
-			<artifactId>spring-ai-alibaba-starter</artifactId>
+			<groupId>com.alibaba.cloud.ai</groupId>
+				<artifactId>spring-ai-alibaba-starter</artifactId>
 			<version>1.0.0-M6.1</version>
 		</dependency>
 		

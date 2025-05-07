@@ -16,16 +16,16 @@
 	<packaging>pom</packaging>
 
 	<description>Spring AI Alibaba MCP Example</description>
-	<name>${artifactId}</name>
+	<name>${project.artifactId}</name>
 
 	<modules>
-		<module>filesystem</module>
-		<module>sqlite/chatbot</module>
-		<module>sqlite/simple</module>
-		<module>github</module>
+		<module>mcp-filesystem</module>
+		<module>sqlite/mdp-sqlite-chatbot</module>
+		<module>sqlite/mcp-sqlite</module>
+		<module>mcp-github</module>
 		<module>mcp-weather-client</module>
 		<module>mcp-javaseeker-client</module>
-		<module>mcp-javaseeker-client</module>
+		<module>mcp-stock-client</module>
 	</modules>
 
 </project>
