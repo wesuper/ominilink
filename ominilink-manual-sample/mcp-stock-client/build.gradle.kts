@@ -18,13 +18,15 @@ dependencies {
     implementation("org.springframework.ai:spring-ai-mcp-client-webflux:1.0.0-M6")
     implementation("org.springframework.ai:spring-ai-mcp-client-spring-boot-starter:1.0.0-M6")
     implementation("org.springframework.ai:spring-ai-mcp-client-webflux-spring-boot-starter:1.0.0-M6")
+    implementation("org.springframework.ai:spring-ai-mcp-utils:1.0.0-M6")
+    implementation("org.springframework.ai:spring-ai-mcp-transport-http:1.0.0-M6")
+    implementation("org.springframework.ai:spring-ai-mcp-transport-websocket:1.0.0-M6")
+    implementation("org.springframework.ai:spring-ai-mcp-common:1.0.0-M6")
+    implementation("org.springframework.ai:spring-ai-mcp-spec-api:1.0.0-M6")
     
     // Logging
     implementation("org.slf4j:slf4j-api")
     implementation("ch.qos.logback:logback-classic")
-    
-    // Utils
-    implementation("org.springframework.ai:spring-ai-mcp-utils:1.0.0-M6")
 }
 
 tasks.withType<JavaCompile> {
