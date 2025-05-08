@@ -3,11 +3,34 @@
  */
 
 rootProject.name = "ominilink"
+
+include(
+    "ominilink-bridge",
+    "ominilink-flywise",
+    "ominilink-regsvr",
+    "ominilink-manual-sample"
+)
+
 include(":ominilink-flywise-stock")
-include(":ominilink-bridge")
 include(":ominilink-flywise-weather")
-include(":ominilink-flywise")
 include(":ominilink-bridge-javaseeker")
+include(":ominilink-regsvr-nacos")
+
+// Add manual sample submodules
+include(":mcp-stock-client")
+include(":mcp-weather-client")
+include(":mcp-javaseeker-client")
+include(":mcp-github")
+include(":mcp-filesystem")
+
 project(":ominilink-flywise-stock").projectDir = file("ominilink-flywise/ominilink-flywise-stock")
 project(":ominilink-flywise-weather").projectDir = file("ominilink-flywise/ominilink-flywise-weather")
 project(":ominilink-bridge-javaseeker").projectDir = file("ominilink-bridge/ominilink-bridge-javaseeker")
+project(":ominilink-regsvr-nacos").projectDir = file("ominilink-regsvr/ominilink-regsvr-nacos")
+
+// Set manual sample submodule paths
+project(":mcp-stock-client").projectDir = file("ominilink-manual-sample/mcp-stock-client")
+project(":mcp-weather-client").projectDir = file("ominilink-manual-sample/mcp-weather-client")
+project(":mcp-javaseeker-client").projectDir = file("ominilink-manual-sample/mcp-javaseeker-client")
+project(":mcp-github").projectDir = file("ominilink-manual-sample/mcp-github")
+project(":mcp-filesystem").projectDir = file("ominilink-manual-sample/mcp-filesystem")

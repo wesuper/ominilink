@@ -30,7 +30,7 @@
 		<spring-ai-alibaba.version>1.0.0-M6.1</spring-ai-alibaba.version>
 
 		<!-- Spring Boot -->
-		<spring-boot.version>3.4.0</spring-boot.version>
+		<spring-boot.version>3.4.5</spring-boot.version>
 
 		<!-- maven plugin -->
 		<maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
@@ -41,8 +41,8 @@
 	<modules>
 		<module>ominilink-bridge</module>
 		<module>ominilink-flywise</module>
-<!--		<module>ominilink-regsvr</module>-->
-<!--		<module>ominilink-manual-sample</module>-->
+		<module>ominilink-regsvr</module>
+		<module>ominilink-manual-sample</module>
 	</modules>
 
 	<dependencyManagement>
