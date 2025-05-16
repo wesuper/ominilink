@@ -1,7 +1,11 @@
+import org.apache.tools.ant.taskdefs.optional.junit.JUnitTest
+
 plugins {
+    java
+    `java-library`
+    idea
     id("org.springframework.boot") version "3.4.5" apply false
     id("io.spring.dependency-management") version "1.1.4" apply false
-    java
 }
 
 allprojects {
@@ -10,16 +14,17 @@ allprojects {
 
     repositories {
         mavenLocal()
-        mavenCentral()
         maven { url = uri("https://repo.spring.io/milestone") }
         maven { url = uri("https://repo.spring.io/snapshot") }
         maven { url = uri("https://oss.sonatype.org/content/groups/public/") }
         maven { url = uri("https://maven.aliyun.com/repository/public") }
+        mavenCentral()
     }
 }
 
 subprojects {
     apply(plugin = "java")
+    apply(plugin = "java-library")
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
 
@@ -34,7 +39,10 @@ subprojects {
     tasks.withType<JavaCompile> {
         options.encoding = "UTF-8"
         options.compilerArgs.add("-parameters")
-        options.release.set(21)
+//        options.release.set(21)
+    }
+    tasks.named<Test>("test") {
+        useJUnitPlatform()
     }
 
     extra["springBootVersion"] = "3.4.5"

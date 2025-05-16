@@ -3,11 +3,11 @@ plugins {
     id("io.spring.dependency-management") apply false
 }
 
-allprojects {
-    repositories {
-        mavenCentral()
-    }
-}
+//allprojects {
+//    repositories {
+//        mavenCentral()
+//    }
+//}
 
 subprojects {
     apply(plugin = "org.springframework.boot")
@@ -18,14 +18,14 @@ subprojects {
     }
 }
 
-project(":ominilink-flywise-stock") {
+project(":ominilink-flywise:ominilink-flywise-stock") {
     tasks.bootJar {
         enabled = true
         mainClass.set("com.alibaba.spring.ai.example.stock.StockServerApplication")
     }
 }
 
-project(":ominilink-flywise-weather") {
+project(":ominilink-flywise:ominilink-flywise-weather") {
     tasks.bootJar {
         enabled = true
         mainClass.set("org.springframework.ai.mcp.sample.server.McpServerApplication")

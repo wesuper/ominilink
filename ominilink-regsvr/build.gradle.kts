@@ -18,7 +18,7 @@ subprojects {
     }
 }
 
-project(":ominilink-regsvr-nacos") {
+project(":ominilink-regsvr:ominilink-regsvr-nacos") {
     tasks.bootJar {
         enabled = true
         mainClass.set("com.alibaba.cloud.ai.example.Application")

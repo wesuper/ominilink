@@ -48,35 +48,35 @@ subprojects {
     }
 }
 
-project(":mcp-stock-client") {
+project(":ominilink-manual-sample:mcp-stock-client") {
     tasks.bootJar {
         enabled = true
         mainClass.set("com.alibaba.cloud.ai.example.mcp.streamable.Application")
     }
 }
 
-project(":mcp-github") {
+project(":ominilink-manual-sample:mcp-github") {
     tasks.bootJar {
         enabled = true
         mainClass.set("org.springframework.ai.mcp.samples.filesystem.Application")
     }
 }
 
-project(":mcp-filesystem") {
+project(":ominilink-manual-sample:mcp-filesystem") {
     tasks.bootJar {
         enabled = true
         mainClass.set("org.springframework.ai.mcp.samples.filesystem.Application")
     }
 }
 
-project(":mcp-weather-client") {
+project(":ominilink-manual-sample:mcp-weather-client") {
     tasks.bootJar {
         enabled = true
         mainClass.set("org.springframework.ai.mcp.samples.client.Application")
     }
 }
 
-project(":mcp-javaseeker-client") {
+project(":ominilink-manual-sample:mcp-javaseeker-client") {
     tasks.bootJar {
         enabled = true
         mainClass.set("org.springframework.ai.mcp.samples.client.Application")
