@@ -2,121 +2,121 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
-      <module name="ominilink.mcp-filesystem" target="21" />
-      <module name="ominilink.mcp-filesystem.main" target="21" />
-      <module name="ominilink.mcp-filesystem.test" target="21" />
-      <module name="ominilink.mcp-github" target="21" />
-      <module name="ominilink.mcp-github.main" target="21" />
-      <module name="ominilink.mcp-github.test" target="21" />
-      <module name="ominilink.mcp-javaseeker-client" target="21" />
-      <module name="ominilink.mcp-javaseeker-client.main" target="21" />
-      <module name="ominilink.mcp-javaseeker-client.test" target="21" />
-      <module name="ominilink.mcp-stock-client" target="21" />
-      <module name="ominilink.mcp-stock-client.main" target="21" />
-      <module name="ominilink.mcp-stock-client.test" target="21" />
-      <module name="ominilink.mcp-weather-client" target="21" />
-      <module name="ominilink.mcp-weather-client.main" target="21" />
-      <module name="ominilink.mcp-weather-client.test" target="21" />
-      <module name="ominilink.ominilink-bridge-javaseeker" target="21" />
-      <module name="ominilink.ominilink-bridge-javaseeker.main" target="21" />
-      <module name="ominilink.ominilink-bridge-javaseeker.test" target="21" />
-      <module name="ominilink.ominilink-flywise-stock" target="21" />
-      <module name="ominilink.ominilink-flywise-stock.main" target="21" />
-      <module name="ominilink.ominilink-flywise-stock.test" target="21" />
-      <module name="ominilink.ominilink-flywise-weather" target="21" />
-      <module name="ominilink.ominilink-flywise-weather.main" target="21" />
-      <module name="ominilink.ominilink-flywise-weather.test" target="21" />
-      <module name="ominilink.ominilink-manual-sample" target="21" />
-      <module name="ominilink.ominilink-manual-sample.main" target="21" />
-      <module name="ominilink.ominilink-manual-sample.mcp-filesystem" target="21" />
-      <module name="ominilink.ominilink-manual-sample.mcp-filesystem.main" target="21" />
-      <module name="ominilink.ominilink-manual-sample.mcp-filesystem.test" target="21" />
-      <module name="ominilink.ominilink-manual-sample.mcp-github" target="21" />
-      <module name="ominilink.ominilink-manual-sample.mcp-github.main" target="21" />
-      <module name="ominilink.ominilink-manual-sample.mcp-github.test" target="21" />
-      <module name="ominilink.ominilink-manual-sample.mcp-javaseeker-client" target="21" />
-      <module name="ominilink.ominilink-manual-sample.mcp-javaseeker-client.main" target="21" />
-      <module name="ominilink.ominilink-manual-sample.mcp-javaseeker-client.test" target="21" />
-      <module name="ominilink.ominilink-manual-sample.mcp-stock-client" target="21" />
-      <module name="ominilink.ominilink-manual-sample.mcp-stock-client.main" target="21" />
-      <module name="ominilink.ominilink-manual-sample.mcp-stock-client.test" target="21" />
-      <module name="ominilink.ominilink-manual-sample.mcp-weather-client" target="21" />
-      <module name="ominilink.ominilink-manual-sample.mcp-weather-client.main" target="21" />
-      <module name="ominilink.ominilink-manual-sample.mcp-weather-client.test" target="21" />
-      <module name="ominilink.ominilink-manual-sample.test" target="21" />
-      <module name="ominilink.ominilink-regsvr-nacos" target="21" />
-      <module name="ominilink.ominilink-regsvr-nacos.main" target="21" />
-      <module name="ominilink.ominilink-regsvr-nacos.test" target="21" />
+      <module name="omnilink.mcp-filesystem" target="21" />
+      <module name="omnilink.mcp-filesystem.main" target="21" />
+      <module name="omnilink.mcp-filesystem.test" target="21" />
+      <module name="omnilink.mcp-github" target="21" />
+      <module name="omnilink.mcp-github.main" target="21" />
+      <module name="omnilink.mcp-github.test" target="21" />
+      <module name="omnilink.mcp-javaseeker-client" target="21" />
+      <module name="omnilink.mcp-javaseeker-client.main" target="21" />
+      <module name="omnilink.mcp-javaseeker-client.test" target="21" />
+      <module name="omnilink.mcp-stock-client" target="21" />
+      <module name="omnilink.mcp-stock-client.main" target="21" />
+      <module name="omnilink.mcp-stock-client.test" target="21" />
+      <module name="omnilink.mcp-weather-client" target="21" />
+      <module name="omnilink.mcp-weather-client.main" target="21" />
+      <module name="omnilink.mcp-weather-client.test" target="21" />
+      <module name="omnilink.omnilink-bridge-javaseeker" target="21" />
+      <module name="omnilink.omnilink-bridge-javaseeker.main" target="21" />
+      <module name="omnilink.omnilink-bridge-javaseeker.test" target="21" />
+      <module name="omnilink.omnilink-flywise-stock" target="21" />
+      <module name="omnilink.omnilink-flywise-stock.main" target="21" />
+      <module name="omnilink.omnilink-flywise-stock.test" target="21" />
+      <module name="omnilink.omnilink-flywise-weather" target="21" />
+      <module name="omnilink.omnilink-flywise-weather.main" target="21" />
+      <module name="omnilink.omnilink-flywise-weather.test" target="21" />
+      <module name="omnilink.omnilink-manual-sample" target="21" />
+      <module name="omnilink.omnilink-manual-sample.main" target="21" />
+      <module name="omnilink.omnilink-manual-sample.mcp-filesystem" target="21" />
+      <module name="omnilink.omnilink-manual-sample.mcp-filesystem.main" target="21" />
+      <module name="omnilink.omnilink-manual-sample.mcp-filesystem.test" target="21" />
+      <module name="omnilink.omnilink-manual-sample.mcp-github" target="21" />
+      <module name="omnilink.omnilink-manual-sample.mcp-github.main" target="21" />
+      <module name="omnilink.omnilink-manual-sample.mcp-github.test" target="21" />
+      <module name="omnilink.omnilink-manual-sample.mcp-javaseeker-client" target="21" />
+      <module name="omnilink.omnilink-manual-sample.mcp-javaseeker-client.main" target="21" />
+      <module name="omnilink.omnilink-manual-sample.mcp-javaseeker-client.test" target="21" />
+      <module name="omnilink.omnilink-manual-sample.mcp-stock-client" target="21" />
+      <module name="omnilink.omnilink-manual-sample.mcp-stock-client.main" target="21" />
+      <module name="omnilink.omnilink-manual-sample.mcp-stock-client.test" target="21" />
+      <module name="omnilink.omnilink-manual-sample.mcp-weather-client" target="21" />
+      <module name="omnilink.omnilink-manual-sample.mcp-weather-client.main" target="21" />
+      <module name="omnilink.omnilink-manual-sample.mcp-weather-client.test" target="21" />
+      <module name="omnilink.omnilink-manual-sample.test" target="21" />
+      <module name="omnilink.omnilink-regsvr-nacos" target="21" />
+      <module name="omnilink.omnilink-regsvr-nacos.main" target="21" />
+      <module name="omnilink.omnilink-regsvr-nacos.test" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="ominilink.mcp-filesystem" options="-parameters -parameters" />
-      <module name="ominilink.mcp-filesystem.main" options="-parameters -parameters" />
-      <module name="ominilink.mcp-filesystem.test" options="-parameters -parameters" />
-      <module name="ominilink.mcp-github" options="-parameters -parameters" />
-      <module name="ominilink.mcp-github.main" options="-parameters -parameters" />
-      <module name="ominilink.mcp-github.test" options="-parameters -parameters" />
-      <module name="ominilink.mcp-javaseeker-client" options="-parameters -parameters" />
-      <module name="ominilink.mcp-javaseeker-client.main" options="-parameters -parameters" />
-      <module name="ominilink.mcp-javaseeker-client.test" options="-parameters -parameters" />
-      <module name="ominilink.mcp-stock-client" options="-parameters -parameters" />
-      <module name="ominilink.mcp-stock-client.main" options="-parameters -parameters" />
-      <module name="ominilink.mcp-stock-client.test" options="-parameters -parameters" />
-      <module name="ominilink.mcp-weather-client" options="-parameters -parameters" />
-      <module name="ominilink.mcp-weather-client.main" options="-parameters -parameters" />
-      <module name="ominilink.mcp-weather-client.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-bridge" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-bridge-javaseeker" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-bridge-javaseeker.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-bridge-javaseeker.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-bridge.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-bridge.ominilink-bridge-javaseeker" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-bridge.ominilink-bridge-javaseeker.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-bridge.ominilink-bridge-javaseeker.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-bridge.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-flywise" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-flywise-stock" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-flywise-stock.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-flywise-stock.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-flywise-weather" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-flywise-weather.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-flywise-weather.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-flywise.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-flywise.ominilink-flywise-stock" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-flywise.ominilink-flywise-stock.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-flywise.ominilink-flywise-stock.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-flywise.ominilink-flywise-weather" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-flywise.ominilink-flywise-weather.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-flywise.ominilink-flywise-weather.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-flywise.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.mcp-filesystem" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.mcp-filesystem.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.mcp-filesystem.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.mcp-github" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.mcp-github.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.mcp-github.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.mcp-javaseeker-client" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.mcp-javaseeker-client.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.mcp-javaseeker-client.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.mcp-stock-client" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.mcp-stock-client.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.mcp-stock-client.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.mcp-weather-client" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.mcp-weather-client.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.mcp-weather-client.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-manual-sample.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-regsvr" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-regsvr-nacos" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-regsvr-nacos.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-regsvr-nacos.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-regsvr.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-regsvr.ominilink-regsvr-nacos" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-regsvr.ominilink-regsvr-nacos.main" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-regsvr.ominilink-regsvr-nacos.test" options="-parameters -parameters" />
-      <module name="ominilink.ominilink-regsvr.test" options="-parameters -parameters" />
+      <module name="omnilink.mcp-filesystem" options="-parameters -parameters" />
+      <module name="omnilink.mcp-filesystem.main" options="-parameters -parameters" />
+      <module name="omnilink.mcp-filesystem.test" options="-parameters -parameters" />
+      <module name="omnilink.mcp-github" options="-parameters -parameters" />
+      <module name="omnilink.mcp-github.main" options="-parameters -parameters" />
+      <module name="omnilink.mcp-github.test" options="-parameters -parameters" />
+      <module name="omnilink.mcp-javaseeker-client" options="-parameters -parameters" />
+      <module name="omnilink.mcp-javaseeker-client.main" options="-parameters -parameters" />
+      <module name="omnilink.mcp-javaseeker-client.test" options="-parameters -parameters" />
+      <module name="omnilink.mcp-stock-client" options="-parameters -parameters" />
+      <module name="omnilink.mcp-stock-client.main" options="-parameters -parameters" />
+      <module name="omnilink.mcp-stock-client.test" options="-parameters -parameters" />
+      <module name="omnilink.mcp-weather-client" options="-parameters -parameters" />
+      <module name="omnilink.mcp-weather-client.main" options="-parameters -parameters" />
+      <module name="omnilink.mcp-weather-client.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-bridge" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-bridge-javaseeker" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-bridge-javaseeker.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-bridge-javaseeker.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-bridge.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-bridge.omnilink-bridge-javaseeker" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-bridge.omnilink-bridge-javaseeker.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-bridge.omnilink-bridge-javaseeker.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-bridge.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-flywise" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-flywise-stock" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-flywise-stock.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-flywise-stock.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-flywise-weather" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-flywise-weather.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-flywise-weather.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-flywise.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-flywise.omnilink-flywise-stock" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-flywise.omnilink-flywise-stock.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-flywise.omnilink-flywise-stock.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-flywise.omnilink-flywise-weather" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-flywise.omnilink-flywise-weather.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-flywise.omnilink-flywise-weather.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-flywise.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.mcp-filesystem" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.mcp-filesystem.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.mcp-filesystem.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.mcp-github" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.mcp-github.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.mcp-github.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.mcp-javaseeker-client" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.mcp-javaseeker-client.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.mcp-javaseeker-client.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.mcp-stock-client" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.mcp-stock-client.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.mcp-stock-client.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.mcp-weather-client" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.mcp-weather-client.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.mcp-weather-client.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-manual-sample.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-regsvr" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-regsvr-nacos" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-regsvr-nacos.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-regsvr-nacos.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-regsvr.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-regsvr.omnilink-regsvr-nacos" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-regsvr.omnilink-regsvr-nacos.main" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-regsvr.omnilink-regsvr-nacos.test" options="-parameters -parameters" />
+      <module name="omnilink.omnilink-regsvr.test" options="-parameters -parameters" />
     </option>
   </component>
 </project>

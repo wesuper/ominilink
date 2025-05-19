@@ -5,13 +5,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.wesuper.ailite</groupId>
-	<artifactId>ominilink</artifactId>
+	<artifactId>omnilink</artifactId>
 	<version>${revision}</version>
 	<packaging>pom</packaging>
 
 	<description>omnilink - the omoni mcp server links AI agents to everything. Powered by Spring AI Alibaba.</description>
-	<name>ominilink</name>
-	<url>https://github.com/wesuper/ominilink</url>
+	<name>omnilink</name>
+	<url>https://github.com/wesuper/omnilink</url>
 
 	<properties>
 		<!-- Project revision -->
@@ -39,10 +39,10 @@
 	</properties>
 
 	<modules>
-		<module>ominilink-bridge</module>
-		<module>ominilink-flywise</module>
-		<module>ominilink-regsvr</module>
-		<module>ominilink-manual-sample</module>
+		<module>omnilink-bridge</module>
+		<module>omnilink-flywise</module>
+		<module>omnilink-regsvr</module>
+		<module>omnilink-manual-sample</module>
 	</modules>
 
 	<dependencyManagement>
