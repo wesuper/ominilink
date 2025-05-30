@@ -3,48 +3,33 @@ plugins {
     id("io.spring.dependency-management") apply false
 }
 
-// 继承父项目的版本管理
-val springBootVersion: String by project
-val springAiVersion: String by project
-
-allprojects {
-    group = "org.wesuper.ailite"
-
-    repositories {
-        mavenCentral()
-        maven {
-            url = uri("https://repo.spring.io/milestone")
-        }
-        maven {
-            url = uri("https://repo.spring.io/snapshot")
-        }
-    }
+// Disable bootJar for this aggregator module itself
+tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+    enabled = false
 }
 
+// Removed problematic version properties and allprojects repositories block.
+// BOMs are applied via buildlogic.java-conventions.
+
 subprojects {
-    apply(plugin = "org.springframework.boot")
-    apply(plugin = "io.spring.dependency-management")
+    apply(plugin = "org.springframework.boot") // Potentially redundant if buildlogic.java-conventions is used by subprojects
+    apply(plugin = "io.spring.dependency-management") // Redundant due to platform BOMs
 
     tasks.bootJar {
         enabled = false
     }
 
-    // 使用父项目的版本管理
-    dependencyManagement {
-        imports {
-            mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
-            mavenBom("org.springframework.ai:spring-ai-bom:${springAiVersion}")
-        }
-    }
+    // Removed redundant dependencyManagement block.
+    // Versions/alignments come from BOMs applied by buildlogic.java-conventions.
 
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter")
-        implementation("org.springframework.boot:spring-boot-starter-web")
-        implementation("org.springframework.boot:spring-boot-starter-webflux")
-        implementation("org.projectreactor:reactor-core")
-        implementation("com.fasterxml.jackson.core:jackson-databind")
-        implementation("io.projectreactor.netty:reactor-netty")
-        implementation("org.springframework.ai:spring-ai-mcp")
+        implementation("org.springframework.boot:spring-boot-starter-web") // If truly common
+        implementation("org.springframework.boot:spring-boot-starter-webflux") // If truly common
+        // Removed: implementation("org.projectreactor:reactor-core") - submodules should declare with libs
+        implementation("com.fasterxml.jackson.core:jackson-databind") // If truly common
+        implementation("io.projectreactor.netty:reactor-netty") // If truly common
+        // Removed: implementation("org.springframework.ai:spring-ai-mcp") - submodules should declare with libs
     }
 }
 

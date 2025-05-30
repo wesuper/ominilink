@@ -5,34 +5,26 @@
 plugins {
     `java-library`
     `maven-publish`
+    // Ensure access to version catalog if not automatically available in buildSrc plugins.
+    // This might require further setup in buildSrc/build.gradle.kts if libs isn't found.
+    // For now, assuming it can be made available or accessed correctly.
 }
 
-repositories {
-    mavenLocal()
-    maven {
-        url = uri("https://repo.spring.io/milestone")
-    }
+// Repositories should be defined in settings.gradle.kts, removing from here.
 
-    maven {
-        url = uri("https://repo.spring.io/snapshot")
-    }
+// Group and version are set in root build.gradle.kts for allprojects.
+// Java compatibility is set in root build.gradle.kts for subprojects.
 
-    maven {
-        url = uri("https://oss.sonatype.org/content/groups/public/")
-    }
+dependencies {
+    // Accessing libs from a convention plugin in buildSrc.
+    // Ensure 'libs' is accessible. If not, might need 'rootProject.libs' or other context.
+    // Programmatic access to the version catalog for use in buildSrc
+    val libsCatalog = project.extensions.getByType(org.gradle.api.artifacts.VersionCatalogsExtension::class.java).named("libs")
 
-    maven {
-        url = uri("https://maven.aliyun.com/repository/public")
-    }
-
-    maven {
-        url = uri("https://repo.maven.apache.org/maven2/")
-    }
+    implementation(platform(libsCatalog.findLibrary("spring-boot-dependencies").get())) // Corrected alias
+    implementation(platform(libsCatalog.findLibrary("spring-ai-bom").get())) // Corrected alias
 }
 
-group = "org.wesuper.ailite"
-version = "1.0.0"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 publishing {
     publications.create<MavenPublication>("maven") {
@@ -42,6 +34,7 @@ publishing {
 
 tasks.withType<JavaCompile>() {
     options.encoding = "UTF-8"
+    // Java version and -parameters are handled by the root build.gradle.kts's subprojects block
 }
 
 tasks.withType<Javadoc>() {

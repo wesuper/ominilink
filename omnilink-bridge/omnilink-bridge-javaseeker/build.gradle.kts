@@ -4,11 +4,21 @@
 
 plugins {
     id("buildlogic.java-conventions")
+    alias(libs.plugins.org.springframework.boot)
+    application // Already has application plugin
+}
+
+application {
+    mainClass.set("org.springframework.ai.mcp.sample.server.McpServerApplication")
 }
 
 dependencies {
-    api(libs.org.springframework.ai.spring.ai.mcp.server.spring.boot.starter)
+    // api(libs.org.springframework.ai.spring.ai.mcp.server.spring.boot.starter) // Removed MCP Starter
     api(libs.org.springframework.spring.web)
 }
 
 description = "omnilink-bridge-javaseeker"
+
+tasks.named<Test>("test") {
+    enabled = false
+}

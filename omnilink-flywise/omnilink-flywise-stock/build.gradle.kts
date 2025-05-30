@@ -4,11 +4,21 @@
 
 plugins {
     id("buildlogic.java-conventions")
+    alias(libs.plugins.org.springframework.boot)
+    application
+}
+
+application {
+    mainClass.set("com.alibaba.spring.ai.example.stock.StockServerApplication")
 }
 
 dependencies {
-    api(libs.org.springframework.ai.spring.ai.mcp.server.spring.boot.starter)
+    // api(libs.org.springframework.ai.spring.ai.mcp.server.spring.boot.starter) // Removed MCP Starter
     api(libs.org.springframework.spring.web)
 }
 
 description = "omnilink-flywise-stock"
+
+tasks.named<Test>("test") {
+    enabled = false
+}

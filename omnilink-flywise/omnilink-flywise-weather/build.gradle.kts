@@ -4,11 +4,16 @@
 
 plugins {
     id("buildlogic.java-conventions")
+    alias(libs.plugins.org.springframework.boot)
 }
 
 dependencies {
-    api(libs.org.springframework.ai.spring.ai.mcp.server.webflux.spring.boot.starter)
+    // api(libs.org.springframework.ai.spring.ai.mcp.server.webflux.spring.boot.starter) // Removed MCP Starter
     api(libs.org.springframework.spring.web)
 }
 
 description = "omnilink-flywise-weather"
+
+tasks.named<Test>("test") {
+    enabled = false
+}

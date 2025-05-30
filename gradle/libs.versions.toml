@@ -2,11 +2,61 @@
 # https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
 
 [versions]
-org-springframework-ai-spring-ai-mcp-server-spring-boot-starter = "1.0.0-M6"
-org-springframework-ai-spring-ai-mcp-server-webflux-spring-boot-starter = "1.0.0-M6"
-org-springframework-spring-web = "6.2.0"
+java = "21"
+springAi = "1.0.0" # Updated Spring AI version
+# Removed springAiAlibaba and springAiAlibabaM51 versions
+springBoot = "3.2.5" # Changed to a known valid version
+# Versions for existing libs from original file
+# Removed MCP server starter versions as these artifacts might not exist for Spring AI 1.0.0
+# org-springframework-ai-spring-ai-mcp-server-spring-boot-starter = "1.0.0"
+# org-springframework-ai-spring-ai-mcp-server-webflux-spring-boot-starter = "1.0.0"
+# org-springframework-spring-web = "6.2.0" # Let Spring Boot BOM manage this
+
+# Other common dependencies, versions can be added if needed
+commonsIo = "2.15.1" # From mcp-filesystem
+kohsukeGithubApi = "1.315" # From mcp-github
 
 [libraries]
-org-springframework-ai-spring-ai-mcp-server-spring-boot-starter = { module = "org.springframework.ai:spring-ai-mcp-server-spring-boot-starter", version.ref = "org-springframework-ai-spring-ai-mcp-server-spring-boot-starter" }
-org-springframework-ai-spring-ai-mcp-server-webflux-spring-boot-starter = { module = "org.springframework.ai:spring-ai-mcp-server-webflux-spring-boot-starter", version.ref = "org-springframework-ai-spring-ai-mcp-server-webflux-spring-boot-starter" }
-org-springframework-spring-web = { module = "org.springframework:spring-web", version.ref = "org-springframework-spring-web" }
+# Spring Boot
+spring-boot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springBoot" }
+org-springframework-boot-spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" } # Version from BOM
+org-springframework-boot-spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" } # Version from BOM
+org-springframework-boot-spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" } # Version from BOM
+org-springframework-boot-spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa"} # For potential JPA use with SQLite
+
+# Spring AI
+spring-ai-bom = { module = "org.springframework.ai:spring-ai-bom", version.ref = "springAi" }
+org-springframework-ai-spring-ai-mcp = { module = "org.springframework.ai:spring-ai-mcp" } # Version from BOM
+org-springframework-ai-spring-ai-mcp-core = { module = "org.springframework.ai:spring-ai-mcp-core" } # Version from BOM
+org-springframework-ai-spring-ai-mcp-client = { module = "org.springframework.ai:spring-ai-mcp-client"} # Version from BOM
+# Removed MCP starter aliases as these artifacts might not exist for Spring AI 1.0.0 or are restructured
+# org-springframework-ai-spring-ai-mcp-client-spring-boot-starter = { module = "org.springframework.ai:spring-ai-mcp-client-spring-boot-starter", version.ref = "springAi" }
+# org-springframework-ai-spring-ai-mcp-client-webflux-spring-boot-starter = { module = "org.springframework.ai:spring-ai-mcp-client-webflux-spring-boot-starter", version.ref = "springAi" }
+# org-springframework-ai-spring-ai-mcp-server-spring-boot-starter = { module = "org.springframework.ai:spring-ai-mcp-server-spring-boot-starter", version.ref = "org-springframework-ai-spring-ai-mcp-server-spring-boot-starter" }
+# org-springframework-ai-spring-ai-mcp-server-webflux-spring-boot-starter = { module = "org.springframework.ai:spring-ai-mcp-server-webflux-spring-boot-starter", version.ref = "org-springframework-ai-spring-ai-mcp-server-webflux-spring-boot-starter" }
+# org-springframework-ai-spring-ai-mcp-server-webmvc-spring-boot-starter = { module = "org.springframework.ai:spring-ai-mcp-server-webmvc-spring-boot-starter", version.ref = "springAi" }
+
+
+# Alibaba Spring AI - REMOVED
+# com-alibaba-cloud-ai-spring-ai-alibaba-starter = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-starter", version.ref = "springAiAlibaba" }
+# com-alibaba-cloud-ai-spring-ai-alibaba-starter-m51 = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-starter", version.ref = "springAiAlibabaM51" }
+
+# Other
+org-springframework-spring-web = { module = "org.springframework:spring-web" } # Version from Spring Boot BOM
+commons-io = { module = "commons-io:commons-io", version.ref = "commonsIo" }
+kohsuke-github-api = { module = "org.kohsuke:github-api", version.ref = "kohsukeGithubApi" }
+org-projectreactor-reactor-core = { module = "io.projectreactor:reactor-core" } # Version from Spring Boot BOM
+
+# For SQLite
+sqlite-jdbc = { module = "org.xerial:sqlite-jdbc", version = "3.43.0.0" } # Example version
+
+[plugins]
+org-springframework-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
+# buildlogic.java-conventions should handle Kotlin versioning. Example:
+# kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version = "1.9.21" }
+# android-application = { id = "com.android.application", version = "8.1.0" }
+# android-library = { id = "com.android.library", version = "8.1.0" }
+# kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.9.21" }
+# kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version = "1.9.21" }
+# kotlin-plugin-spring = {id = "org.jetbrains.kotlin.plugin.spring", version = "1.9.21"}
+# kotlin-plugin-jpa = {id = "org.jetbrains.kotlin.plugin.jpa", version = "1.9.21"}

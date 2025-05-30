@@ -3,6 +3,11 @@ plugins {
     id("io.spring.dependency-management") apply false
 }
 
+// Disable bootJar for this aggregator module itself
+tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+    enabled = false
+}
+
 //allprojects {
 //    repositories {
 //        mavenCentral()

@@ -8,7 +8,7 @@ include(
     "omnilink-bridge",
     "omnilink-flywise",
     "omnilink-regsvr",
-//    "omnilink-manual-sample"
+    "omnilink-manual-sample"
 )
 
 include(":omnilink-flywise:omnilink-flywise-stock")
@@ -17,20 +17,41 @@ include(":omnilink-bridge:omnilink-bridge-javaseeker")
 include(":omnilink-regsvr:omnilink-regsvr-nacos")
 
 // Add manual sample submodules
-//include(":omnilink-manual-sample:mcp-stock-client")
-//include(":omnilink-manual-sample:mcp-weather-client")
-//include(":omnilink-manual-sample:mcp-javaseeker-client")
-//include(":omnilink-manual-sample:mcp-github")
-//include(":omnilink-manual-sample:mcp-filesystem")
+include(":omnilink-manual-sample:mcp-stock-client")
+include(":omnilink-manual-sample:mcp-weather-client")
+include(":omnilink-manual-sample:mcp-javaseeker-client")
+include(":omnilink-manual-sample:mcp-github")
+include(":omnilink-manual-sample:mcp-filesystem")
+include(":omnilink-manual-sample:sqlite:mcp-sqlite")
+include(":omnilink-manual-sample:sqlite:mdp-sqlite-chatbot")
 
 project(":omnilink-flywise:omnilink-flywise-stock").name = "omnilink-flywise-stock"
-//project(":omnilink-flywise:omnilink-flywise-weather").projectDir = file("omnilink-flywise/omnilink-flywise-weather")
-//project(":omnilink-bridge:omnilink-bridge-javaseeker").projectDir = file("omnilink-bridge/omnilink-bridge-javaseeker")
-//project(":omnilink-regsvr:omnilink-regsvr-nacos").projectDir = file("omnilink-regsvr/omnilink-regsvr-nacos")
-//
-//// Set manual sample submodule paths
-//project(":omnilink-manual-sample:mcp-stock-client").projectDir = file("omnilink-manual-sample/mcp-stock-client")
-//project(":omnilink-manual-sample:mcp-weather-client").projectDir = file("omnilink-manual-sample/mcp-weather-client")
-//project(":omnilink-manual-sample:mcp-javaseeker-client").projectDir = file("omnilink-manual-sample/mcp-javaseeker-client")
-//project(":omnilink-manual-sample:mcp-github").projectDir = file("omnilink-manual-sample/mcp-github")
-//project(":omnilink-manual-sample:mcp-filesystem").projectDir = file("omnilink-manual-sample/mcp-filesystem")
+project(":omnilink-flywise:omnilink-flywise-weather").projectDir = file("omnilink-flywise/omnilink-flywise-weather")
+project(":omnilink-bridge:omnilink-bridge-javaseeker").projectDir = file("omnilink-bridge/omnilink-bridge-javaseeker")
+project(":omnilink-regsvr:omnilink-regsvr-nacos").projectDir = file("omnilink-regsvr/omnilink-regsvr-nacos")
+
+// Set manual sample submodule paths
+project(":omnilink-manual-sample:mcp-stock-client").projectDir = file("omnilink-manual-sample/mcp-stock-client")
+project(":omnilink-manual-sample:mcp-weather-client").projectDir = file("omnilink-manual-sample/mcp-weather-client")
+project(":omnilink-manual-sample:mcp-javaseeker-client").projectDir = file("omnilink-manual-sample/mcp-javaseeker-client")
+project(":omnilink-manual-sample:mcp-github").projectDir = file("omnilink-manual-sample/mcp-github")
+project(":omnilink-manual-sample:mcp-filesystem").projectDir = file("omnilink-manual-sample/mcp-filesystem")
+project(":omnilink-manual-sample:sqlite:mcp-sqlite").projectDir = file("omnilink-manual-sample/sqlite/mcp-sqlite")
+project(":omnilink-manual-sample:sqlite:mdp-sqlite-chatbot").projectDir = file("omnilink-manual-sample/sqlite/mdp-sqlite-chatbot")
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS) // Optional: encourages centralized repo declaration
+    repositories {
+        mavenCentral()
+        maven { url = uri("https://repo.spring.io/milestone") }
+        maven { url = uri("https://repo.spring.io/snapshot") }
+        maven { url = uri("https://oss.sonatype.org/content/groups/public/") }
+        maven { url = uri("https://maven.aliyun.com/repository/public") }
+    }
+    pluginManagement {
+        repositories {
+            maven { url = uri("https://maven.aliyun.com/repository/public") }
+            gradlePluginPortal() // Standard Gradle plugin repository
+        }
+    }
+}

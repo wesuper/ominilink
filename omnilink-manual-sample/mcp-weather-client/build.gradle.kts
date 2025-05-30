@@ -4,25 +4,17 @@ plugins {
     application
 }
 
-description = "Spring AI - MCP STREAMABLE WEBFLUX Client EXAMPLE"
+description = "Spring AI - MCP WEBFLUX Client EXAMPLE"
 
 // Repositories are defined in settings.gradle.kts
 
 dependencies {
-    // Spring Boot Core (kept from original build.gradle.kts)
-    implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-    
-    // Spring AI MCP Client Starter (replaces granular dependencies)
     // implementation(libs.org.springframework.ai.spring.ai.mcp.client.webflux.spring.boot.starter) // Removed MCP Starter
-
-    // Alibaba Spring AI Starter
     // implementation(libs.com.alibaba.cloud.ai.spring.ai.alibaba.starter) // Removed Alibaba Starter
 }
 
 application {
-    mainClass.set("com.alibaba.cloud.ai.example.mcp.streamable.Application")
+    mainClass.set("com.alibaba.cloud.ai.example.mcp.webflux.WeatherClientApplication")
 }
 
 tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
