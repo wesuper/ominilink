@@ -23,7 +23,8 @@ dependencies {
     // Removed libs.org.springframework.ai.spring.ai.mcp
     // Removed libs.org.springframework.ai.spring.ai.mcp.core
     // implementation(libs.org.springframework.ai.spring.ai.mcp.client.webflux.spring.boot.starter) // Removed MCP Starter
-    implementation("io.projectreactor:reactor-core:3.6.5")  // Explicit version for diagnosis
+    implementation(libs.org.projectreactor.reactor.core)  // Rely on BOM
+    implementation(libs.spring.ai.starter.model.openai) // Add OpenAI Starter
     
     // Commons IO for file operations
     implementation(libs.commons.io) // Use libs alias (assuming commons-io = "2.15.1" is in libs.versions.toml)

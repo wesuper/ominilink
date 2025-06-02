@@ -3,8 +3,9 @@ package com.alibaba.spring.ai.example.stock.service;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import org.springframework.ai.tool.annotation.Tool;
-import org.springframework.ai.tool.annotation.ToolParam;
+// import org.springframework.ai.tool.annotation.Tool; // Old API
+// import org.springframework.ai.tool.annotation.ToolParam; // Old API
+import org.springframework.context.annotation.Description; // New API for tool description
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
@@ -67,8 +68,8 @@ public class StockService {
     ) implements Serializable {
     }
 
-    @Tool(name = "getStockInfo", description = "Get real-time stock information for the specified stock code")
-    public StockInfo getStockInfo(String stockCode) {
+    @Description("Get real-time stock information for the specified stock code") // Updated annotation
+    public StockInfo getStockInfo(String stockCode) { // Parameter description can be handled by name or request object
         try {
             // Validate stock code format
             if (!stockCode.matches("^[0-9]{6}$")) {

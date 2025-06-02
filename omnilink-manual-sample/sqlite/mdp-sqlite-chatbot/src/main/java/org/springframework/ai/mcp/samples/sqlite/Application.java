@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
-import org.springframework.ai.chat.memory.InMemoryChatMemory;
-import org.springframework.ai.mcp.client.McpClient;
-import org.springframework.ai.mcp.client.McpSyncClient;
-import org.springframework.ai.mcp.client.stdio.ServerParameters;
-import org.springframework.ai.mcp.client.stdio.StdioClientTransport;
-import org.springframework.ai.mcp.spring.McpFunctionCallback;
+// import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor; // Removed for this test
+// import org.springframework.ai.chat.memory.InMemoryChatMemory; // Removed for this test
+// Removed MCP imports
+// import org.springframework.ai.mcp.client.McpClient;
+// import org.springframework.ai.mcp.client.McpSyncClient;
+// import org.springframework.ai.mcp.client.stdio.ServerParameters;
+// import org.springframework.ai.mcp.client.stdio.StdioClientTransport;
+// import org.springframework.ai.mcp.spring.McpFunctionCallback;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,13 +29,13 @@ public class Application {
 
 	@Bean
 	public CommandLineRunner interactiveChat(ChatClient.Builder chatClientBuilder,
-			List<McpFunctionCallback> functionCallbacks,
+			/* List<McpFunctionCallback> functionCallbacks, */ // Removed functionCallbacks parameter
 			ConfigurableApplicationContext context) {
 		return args -> {
 
 			var chatClient = chatClientBuilder
-					.defaultFunctions(functionCallbacks.toArray(new McpFunctionCallback[0]))
-					.defaultAdvisors(new MessageChatMemoryAdvisor(new InMemoryChatMemory()))
+					// .defaultFunctions(functionCallbacks.toArray(new McpFunctionCallback[0])) // Removed MCP tool registration
+					// .defaultAdvisors(new MessageChatMemoryAdvisor(new InMemoryChatMemory())) // Removed for this test
 					.build();
 
 			var scanner = new Scanner(System.in);
@@ -61,35 +62,36 @@ public class Application {
 		};
 	}
 
-	@Bean
-	public List<McpFunctionCallback> functionCallbacks(McpSyncClient mcpClient) {
-
-		var callbacks = mcpClient.listTools(null)
-				.tools()
-				.stream()
-				.map(tool -> new McpFunctionCallback(mcpClient, tool))
-				.toList();
-		return callbacks;
-	}
-
-	@Bean(destroyMethod = "close")
-	public McpSyncClient mcpClient() {
-
-		var stdioParams = ServerParameters.builder("uvx")
-				.args("mcp-server-sqlite", "--db-path",
-						getDbPath())
-				.build();
-
-		var mcpClient = McpClient.using(new StdioClientTransport(stdioParams))
-				.requestTimeout(Duration.ofSeconds(10)).sync();
-
-		var init = mcpClient.initialize();
-
-		System.out.println("MCP Initialized: " + init);
-
-		return mcpClient;
-
-	}
+	// Removed MCP-specific beans: functionCallbacks and mcpClient
+	// @Bean
+	// public List<McpFunctionCallback> functionCallbacks(McpSyncClient mcpClient) {
+	//
+	// var callbacks = mcpClient.listTools(null)
+	// .tools()
+	// .stream()
+	// .map(tool -> new McpFunctionCallback(mcpClient, tool))
+	// .toList();
+	// return callbacks;
+	// }
+	//
+	// @Bean(destroyMethod = "close")
+	// public McpSyncClient mcpClient() {
+	//
+	// var stdioParams = ServerParameters.builder("uvx")
+	// .args("mcp-server-sqlite", "--db-path",
+	// getDbPath())
+	// .build();
+	//
+	// var mcpClient = McpClient.using(new StdioClientTransport(stdioParams))
+	// .requestTimeout(Duration.ofSeconds(10)).sync();
+	//
+	// var init = mcpClient.initialize();
+	//
+	// System.out.println("MCP Initialized: " + init);
+	//
+	// return mcpClient;
+	//
+	// }
 
 	private static String getDbPath() {
 		return Paths.get(System.getProperty("user.dir"), "test.db").toString();

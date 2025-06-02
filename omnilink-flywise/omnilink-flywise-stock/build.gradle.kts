@@ -14,7 +14,10 @@ application {
 
 dependencies {
     // api(libs.org.springframework.ai.spring.ai.mcp.server.spring.boot.starter) // Removed MCP Starter
-    api(libs.org.springframework.spring.web)
+    // api(libs.org.springframework.spring.web) // Replaced by spring-boot-starter-web
+    implementation(libs.org.springframework.boot.spring.boot.starter)
+    implementation(libs.org.springframework.boot.spring.boot.starter.web)
+    implementation(libs.spring.ai.starter.model.openai)
 }
 
 description = "omnilink-flywise-stock"

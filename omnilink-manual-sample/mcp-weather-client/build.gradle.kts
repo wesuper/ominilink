@@ -11,6 +11,9 @@ description = "Spring AI - MCP WEBFLUX Client EXAMPLE"
 dependencies {
     // implementation(libs.org.springframework.ai.spring.ai.mcp.client.webflux.spring.boot.starter) // Removed MCP Starter
     // implementation(libs.com.alibaba.cloud.ai.spring.ai.alibaba.starter) // Removed Alibaba Starter
+    implementation(libs.org.springframework.boot.spring.boot.starter)
+    implementation(libs.org.springframework.boot.spring.boot.starter.webflux)
+    implementation(libs.spring.ai.starter.model.openai)
 }
 
 application {

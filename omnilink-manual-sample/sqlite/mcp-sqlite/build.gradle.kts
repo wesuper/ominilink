@@ -17,6 +17,9 @@ dependencies {
     // Ensure libs.com.alibaba.cloud.ai.spring.ai.alibaba.starter points to a version compatible with 1.0.0-M5.1
     // implementation(libs.com.alibaba.cloud.ai.spring.ai.alibaba.starter) // Removed Alibaba Starter
     // implementation(libs.org.springframework.ai.spring.ai.mcp.client.webflux.spring.boot.starter) // Removed MCP starter
+    implementation(libs.spring.ai.starter.model.openai)
+    implementation(libs.org.springframework.boot.spring.boot.starter.jdbc)
+    runtimeOnly(libs.sqlite.jdbc)
 
     // Dependencies for SQLite that are likely needed but not in mcp-sqlite's pom directly
     // These would typically be in a project that *uses* SQLite, not one *providing a client to it*.

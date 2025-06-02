@@ -7,8 +7,9 @@ import java.time.format.DateTimeFormatter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.springframework.ai.tool.annotation.Tool;
-import org.springframework.ai.tool.annotation.ToolParam;
+// import org.springframework.ai.tool.annotation.Tool; // Old API
+// import org.springframework.ai.tool.annotation.ToolParam; // Old API
+import org.springframework.context.annotation.Description; // New API for tool description
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
@@ -126,8 +127,10 @@ public class OpenMeteoService {
      * @return 指定位置的天气预报
      * @throws RestClientException 如果请求失败
      */
-    @Tool(description = "获取指定经纬度的天气预报")
-    public String getWeatherForecastByLocation(double latitude, double longitude) {
+    @Description("获取指定经纬度的天气预报") // Updated annotation
+    public String getWeatherForecastByLocation(
+            /*@Description("纬度")*/ double latitude, // Parameter description handled by name or request object
+            /*@Description("经度")*/ double longitude) { // Parameter description handled by name or request object
         // 获取天气数据（当前和未来7天）
         var weatherData = restClient.get()
                 .uri("/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weather_code,wind_speed_10m_max,wind_direction_10m_dominant&timezone=auto&forecast_days=7",
@@ -211,9 +214,10 @@ public class OpenMeteoService {
      * @param longitude 经度
      * @return 空气质量信息
      */
-    @Tool(description = "获取指定位置的空气质量信息（模拟数据）")
-    public String getAirQuality(@ToolParam(description = "纬度") double latitude,
-            @ToolParam(description = "经度") double longitude) {
+    @Description("获取指定位置的空气质量信息（模拟数据）") // Updated annotation
+    public String getAirQuality(
+            /*@Description("纬度")*/ double latitude, // Parameter description handled by name or request object
+            /*@Description("经度")*/ double longitude) { // Parameter description handled by name or request object
 
         try {
             // 从天气数据中获取基本信息

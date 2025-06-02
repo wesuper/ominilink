@@ -51,7 +51,7 @@ subprojects {
     // Removed extra properties for versions, should come from libs.versions.toml via aliases
 
     dependencies {
-        // BOMs (spring-boot-dependencies, spring-ai-bom) are now applied via 
+        // BOMs (spring-boot-dependencies, spring-ai-bom) are now applied via
         // the buildlogic.java-conventions plugin for projects that use it.
         // No need to apply them globally here if all relevant projects use that convention.
 

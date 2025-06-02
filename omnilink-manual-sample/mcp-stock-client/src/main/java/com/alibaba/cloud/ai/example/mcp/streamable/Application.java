@@ -1,19 +1,17 @@
 package com.alibaba.cloud.ai.example.mcp.streamable;
 
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.tool.ToolCallbackProvider;
+// import org.springframework.ai.tool.ToolCallbackProvider; // Old API, tools are registered differently
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
+// import org.springframework.context.annotation.ComponentScan; // No longer needed for MCP
+// import org.springframework.stereotype.Component; // Not used directly
 
-@SpringBootApplication(exclude = {
-        org.springframework.ai.mcp.client.autoconfigure.SseHttpClientTransportAutoConfiguration.class,
-})
-@ComponentScan(basePackages = "org.springframework.ai.mcp.client")
+// Removed exclude and ComponentScan related to MCP
+@SpringBootApplication
 public class Application {
 
     public static void main(String[] args) {
@@ -26,13 +24,13 @@ public class Application {
     private String userInput = "阿里巴巴西溪园区";
 
     @Bean
-    public CommandLineRunner predefinedQuestions(ChatClient.Builder chatClientBuilder, ToolCallbackProvider tools,
-            ConfigurableApplicationContext context) {
+    public CommandLineRunner predefinedQuestions(ChatClient.Builder chatClientBuilder,
+            /* ToolCallbackProvider tools, */ ConfigurableApplicationContext context) { // Tools parameter removed
 
         return args -> {
 
             var chatClient = chatClientBuilder
-                    .defaultTools(tools)
+                    // .defaultTools(tools) // Tool registration has changed
                     .build();
 
             System.out.println("\n>>> QUESTION: " + userInput);

@@ -1,16 +1,17 @@
 package org.springframework.ai.mcp.samples.filesystem;
 
 import java.nio.file.Paths;
-import java.time.Duration;
+// import java.time.Duration; // No longer using McpClient with timeout
 import java.util.List;
 
-import io.modelcontextprotocol.client.McpClient;
-import io.modelcontextprotocol.client.McpSyncClient;
-import io.modelcontextprotocol.client.transport.ServerParameters;
-import io.modelcontextprotocol.client.transport.StdioClientTransport;
+// Removed MCP specific imports
+// import io.modelcontextprotocol.client.McpClient;
+// import io.modelcontextprotocol.client.McpSyncClient;
+// import io.modelcontextprotocol.client.transport.ServerParameters;
+// import io.modelcontextprotocol.client.transport.StdioClientTransport;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.tool.ToolCallback;
-import org.springframework.ai.tool.function.FunctionToolCallback;
+// import org.springframework.ai.tool.ToolCallback; // Old API
+// import org.springframework.ai.tool.function.FunctionToolCallback; // Old API
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,11 +28,14 @@ public class Application {
 
 	@Bean
 	public CommandLineRunner predefinedQuestions(ChatClient.Builder chatClientBuilder,
-			List<ToolCallback> functionCallbacks, ConfigurableApplicationContext context) {
+			/*List<ToolCallback> functionCallbacks,*/ ConfigurableApplicationContext context) { // FunctionCallbacks removed
 
 		return args -> {
-			var chatClient = chatClientBuilder.defaultTools(functionCallbacks.toArray(new ToolCallback[0]))
-					.build();
+			// var chatClient = chatClientBuilder.defaultTools(functionCallbacks.toArray(new ToolCallback[0])) // Old tool registration
+			// .build();
+			// For now, build a simple ChatClient. Tool registration would need new Function beans.
+			var chatClient = chatClientBuilder.build();
+
 
 			System.out.println("Running predefined questions with AI model responses:\n");
 
@@ -51,36 +55,37 @@ public class Application {
 		};
 	}
 
-	@Bean
-	public List<ToolCallback> functionCallbacks(McpSyncClient mcpClient) {
-
-		var callbacks = mcpClient.listTools(null)
-				.tools()
-				.stream()
-				.map(tool -> new FunctionToolCallback(mcpClient, tool))
-				.toList();
-		return callbacks;
-	}
-
-	@Bean(destroyMethod = "close")
-	public McpSyncClient mcpClient() {
-
-		// based on
-		// https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem
-		var stdioParams = ServerParameters.builder("npx")
-				.args("-y", "@modelcontextprotocol/server-filesystem", getFilePath())
-				.build();
-
-		var mcpClient = McpClient.sync(new StdioClientTransport(stdioParams))
-				.requestTimeout(Duration.ofSeconds(10)).build();
-
-		var init = mcpClient.initialize();
-
-		System.out.println("MCP Initialized: " + init);
-
-		return mcpClient;
-
-	}
+	// Removed MCP-specific beans for functionCallbacks and mcpClient
+	// @Bean
+	// public List<ToolCallback> functionCallbacks(McpSyncClient mcpClient) {
+	//
+	// var callbacks = mcpClient.listTools(null)
+	// .tools()
+	// .stream()
+	// .map(tool -> new FunctionToolCallback(mcpClient, tool))
+	// .toList();
+	// return callbacks;
+	// }
+	//
+	// @Bean(destroyMethod = "close")
+	// public McpSyncClient mcpClient() {
+	//
+	// // based on
+	// // https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem
+	// var stdioParams = ServerParameters.builder("npx")
+	// .args("-y", "@modelcontextprotocol/server-filesystem", getFilePath())
+	// .build();
+	//
+	// var mcpClient = McpClient.sync(new StdioClientTransport(stdioParams))
+	// .requestTimeout(Duration.ofSeconds(10)).build();
+	//
+	// var init = mcpClient.initialize();
+	//
+	// System.out.println("MCP Initialized: " + init);
+	//
+	// return mcpClient;
+	//
+	// }
 
 	private static String getFilePath() {
 		String path = System.getenv("MCP_FILE_DIRECTORY_PATH");

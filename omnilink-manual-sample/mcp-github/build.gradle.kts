@@ -22,6 +22,7 @@ dependencies {
     // Removed explicit libs.org.springframework.ai.spring.ai.mcp
     // Removed explicit libs.org.springframework.ai.spring.ai.mcp.core
     // implementation(libs.org.springframework.ai.spring.ai.mcp.client.spring.boot.starter) // Removed MCP Starter
+    implementation(libs.spring.ai.starter.model.openai) // Add OpenAI Starter
     
     // GitHub API Client
     implementation(libs.kohsuke.github.api) // Use libs alias

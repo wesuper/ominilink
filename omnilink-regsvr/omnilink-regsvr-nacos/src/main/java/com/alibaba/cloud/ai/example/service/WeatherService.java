@@ -1,6 +1,7 @@
 package com.alibaba.cloud.ai.example.service;
 
-import org.springframework.ai.tool.annotation.Tool;
+// import org.springframework.ai.tool.annotation.Tool; // Old API
+import org.springframework.context.annotation.Description; // New API for tool description
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class WeatherService {
-    @Tool(description = "Get weather information by city name")
+    @Description("Get weather information by city name") // Updated annotation
     public String getWeather(String cityName) {
         return "Sunny in " + cityName;
     }

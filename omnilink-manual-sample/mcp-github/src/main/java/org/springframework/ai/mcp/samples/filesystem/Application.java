@@ -1,16 +1,16 @@
-package org.springframework.ai.mcp.samples.filesystem;
+package org.springframework.ai.mcp.samples.github; // Corrected package
 
-import java.nio.file.Paths;
-import java.time.Duration;
+// import java.nio.file.Paths; // Unused
+// import java.time.Duration; // Unused
 
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.tool.ToolCallbackProvider;
+// import org.springframework.ai.tool.ToolCallbackProvider; // Old API
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.util.StringUtils;
+// import org.springframework.util.StringUtils; // Unused
 
 @SpringBootApplication
 public class Application {
@@ -22,12 +22,12 @@ public class Application {
 	@Bean
 	public CommandLineRunner predefinedQuestions(
 			ChatClient.Builder chatClientBuilder,
-			ToolCallbackProvider tools,
+			/* ToolCallbackProvider tools, */ // Tools parameter removed
 			ConfigurableApplicationContext context) {
 		return args -> {
 			// 构建ChatClient并注入MCP工具
 			var chatClient = chatClientBuilder
-					.defaultTools(tools)
+					// .defaultTools(tools) // Tool registration has changed
 					.build();
 
 			// 定义用户输入

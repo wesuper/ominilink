@@ -14,6 +14,8 @@ dependencies {
     // For now, using versions specified in this module's original pom.
     // implementation(libs.org.springframework.ai.spring.ai.mcp.client.spring.boot.starter) // Removed MCP Starter
     // implementation(libs.com.alibaba.cloud.ai.spring.ai.alibaba.starter) // Removed Alibaba Starter
+    implementation(libs.org.springframework.boot.spring.boot.starter)
+    implementation(libs.spring.ai.starter.model.openai)
 }
 
 // Java version (e.g., 21) is expected to be set by buildlogic.java-conventions

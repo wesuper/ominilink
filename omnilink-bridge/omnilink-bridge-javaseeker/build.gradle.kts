@@ -14,7 +14,12 @@ application {
 
 dependencies {
     // api(libs.org.springframework.ai.spring.ai.mcp.server.spring.boot.starter) // Removed MCP Starter
+    implementation(platform(libs.spring.ai.bom)) // Explicitly apply Spring AI BOM for troubleshooting
     api(libs.org.springframework.spring.web)
+    implementation(libs.org.springframework.boot.spring.boot.starter)
+    implementation(libs.org.springframework.boot.spring.boot.starter.web) // For RestClient and Jackson
+    // implementation("org.springframework.ai:spring-ai-core:1.0.0") // Removed direct spring-ai-core
+    implementation(libs.spring.ai.starter.model.openai) // Use corrected OpenAI starter alias
 }
 
 description = "omnilink-bridge-javaseeker"

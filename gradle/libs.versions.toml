@@ -23,9 +23,15 @@ org-springframework-boot-spring-boot-starter = { module = "org.springframework.b
 org-springframework-boot-spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" } # Version from BOM
 org-springframework-boot-spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" } # Version from BOM
 org-springframework-boot-spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa"} # For potential JPA use with SQLite
+org-springframework-boot-spring-boot-starter-jdbc = { module = "org.springframework.boot:spring-boot-starter-jdbc" } # Version from BOM
 
 # Spring AI
 spring-ai-bom = { module = "org.springframework.ai:spring-ai-bom", version.ref = "springAi" }
+# org-springframework-ai-spring-ai-core = { module = "org.springframework.ai:spring-ai-core" } # Removed, should be transitive
+spring-ai-starter-model-openai = { module = "org.springframework.ai:spring-ai-starter-model-openai", version.ref = "springAi" } # Corrected artifactId and using BOM version
+org-springframework-ai-spring-ai-model = { module = "org.springframework.ai:spring-ai-model" } # Version from BOM
+spring-ai-starter-model-chat-memory = { module = "org.springframework.ai:spring-ai-starter-model-chat-memory", version.ref = "springAi" } # For InMemoryChatMemory
+
 org-springframework-ai-spring-ai-mcp = { module = "org.springframework.ai:spring-ai-mcp" } # Version from BOM
 org-springframework-ai-spring-ai-mcp-core = { module = "org.springframework.ai:spring-ai-mcp-core" } # Version from BOM
 org-springframework-ai-spring-ai-mcp-client = { module = "org.springframework.ai:spring-ai-mcp-client"} # Version from BOM
