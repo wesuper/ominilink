@@ -5,7 +5,7 @@
 java = "21"
 springAi = "1.0.0" # Updated Spring AI version
 # Removed springAiAlibaba and springAiAlibabaM51 versions
-springBoot = "3.2.5" # Changed to a known valid version
+springBoot = "3.3.12" # Updated Spring Boot version
 # Versions for existing libs from original file
 # Removed MCP server starter versions as these artifacts might not exist for Spring AI 1.0.0
 # org-springframework-ai-spring-ai-mcp-server-spring-boot-starter = "1.0.0"
