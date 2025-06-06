@@ -3,13 +3,13 @@
 spring:
   main:
     banner-mode: off
-    web-application-type: reactive
+#    web-application-type: reactive
   ai:
     mcp:
       server:
         name: my-weather-server
         version: 0.0.1
-        type: async
+        type: sync
         enabled: true
         instructions: This reactive server provides weather information tools and resources
         sse-endpoint: /sse

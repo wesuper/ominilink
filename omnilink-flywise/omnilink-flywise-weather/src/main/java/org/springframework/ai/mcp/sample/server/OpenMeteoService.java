@@ -135,7 +135,7 @@ public class OpenMeteoService {
      * @return 指定位置的天气预报
      * @throws RestClientException 如果请求失败
      */
-    @Tool(description = "获取指定经纬度的天气预报")
+    @Tool(name = "getWeatherForecastByLocation", description = "获取指定经纬度的天气预报")
     @Description("获取指定经纬度的天气预报") // Updated annotation
     public String getWeatherForecastByLocation(
             /*@Description("纬度")*/ @ToolParam(description = "纬度") double latitude, // Parameter description handled by name or request object
@@ -223,6 +223,7 @@ public class OpenMeteoService {
      * @param longitude 经度
      * @return 空气质量信息
      */
+    @Tool(description = "获取指定位置的空气质量信息（模拟数据）")
     @Description("获取指定位置的空气质量信息（模拟数据）") // Updated annotation
     public String getAirQuality(
             /*@Description("纬度")*/ double latitude, // Parameter description handled by name or request object
