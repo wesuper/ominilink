@@ -89,7 +89,7 @@ public class Application {
 
 	private static String getFilePath() {
 		String path = System.getenv("MCP_FILE_DIRECTORY_PATH");
-		return StringUtils.isEmpty(path) ? getDbPath() : path;
+		return StringUtils.hasText(path) ? getDbPath() : path;
 	}
 
 	private static String getDbPath() {

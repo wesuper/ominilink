@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 // import org.springframework.ai.tool.annotation.Tool; // Old API
 // import org.springframework.ai.tool.annotation.ToolParam; // Old API
+import org.springframework.ai.tool.annotation.Tool;
+import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.context.annotation.Description; // New annotation for tools
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -102,20 +104,27 @@ public class OpenMeteoService {
      * 获取风向描述
      */
     private String getWindDirection(int degrees) {
-        if (degrees >= 337.5 || degrees < 22.5)
+        if (degrees >= 337.5 || degrees < 22.5) {
             return "北风";
-        if (degrees >= 22.5 && degrees < 67.5)
+        }
+        if (degrees >= 22.5 && degrees < 67.5) {
             return "东北风";
-        if (degrees >= 67.5 && degrees < 112.5)
+        }
+        if (degrees >= 67.5 && degrees < 112.5) {
             return "东风";
-        if (degrees >= 112.5 && degrees < 157.5)
+        }
+        if (degrees >= 112.5 && degrees < 157.5) {
             return "东南风";
-        if (degrees >= 157.5 && degrees < 202.5)
+        }
+        if (degrees >= 157.5 && degrees < 202.5) {
             return "南风";
-        if (degrees >= 202.5 && degrees < 247.5)
+        }
+        if (degrees >= 202.5 && degrees < 247.5) {
             return "西南风";
-        if (degrees >= 247.5 && degrees < 292.5)
+        }
+        if (degrees >= 247.5 && degrees < 292.5) {
             return "西风";
+        }
         return "西北风";
     }
 
@@ -128,9 +137,10 @@ public class OpenMeteoService {
      * @throws RestClientException 如果请求失败
      */
     @Description("获取指定经纬度的天气预报") // Updated annotation
+    @Tool(description = "获取指定经纬度的天气预报")
     public String getWeatherForecastByLocation(
-            /*@Description("纬度")*/ double latitude, // Removed parameter annotation
-            /*@Description("经度")*/ double longitude) { // Removed parameter annotation
+            @ToolParam(description = "纬度") double latitude, // Removed parameter annotation
+            @ToolParam(description = "经度") double longitude) { // Removed parameter annotation
         // 获取天气数据（当前和未来7天）
         var weatherData = restClient.get()
                 .uri("/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weather_code,wind_speed_10m_max,wind_direction_10m_dominant&timezone=auto&forecast_days=7",
@@ -302,42 +312,46 @@ public class OpenMeteoService {
      * 获取欧洲空气质量指数等级
      */
     private String getAqiLevel(Integer aqi) {
-        if (aqi == null)
+        if (aqi == null) {
             return "未知";
+        }
 
-        if (aqi <= 20)
+        if (aqi <= 20) {
             return "优";
-        else if (aqi <= 40)
+        } else if (aqi <= 40) {
             return "良";
-        else if (aqi <= 60)
+        } else if (aqi <= 60) {
             return "中等";
-        else if (aqi <= 80)
+        } else if (aqi <= 80) {
             return "较差";
-        else if (aqi <= 100)
+        } else if (aqi <= 100) {
             return "差";
-        else
+        } else {
             return "极差";
+        }
     }
 
     /**
      * 获取美国空气质量指数等级
      */
     private String getUsAqiLevel(Integer aqi) {
-        if (aqi == null)
+        if (aqi == null) {
             return "未知";
+        }
 
-        if (aqi <= 50)
+        if (aqi <= 50) {
             return "优";
-        else if (aqi <= 100)
+        } else if (aqi <= 100) {
             return "中等";
-        else if (aqi <= 150)
+        } else if (aqi <= 150) {
             return "对敏感人群不健康";
-        else if (aqi <= 200)
+        } else if (aqi <= 200) {
             return "不健康";
-        else if (aqi <= 300)
+        } else if (aqi <= 300) {
             return "非常不健康";
-        else
+        } else {
             return "危险";
+        }
     }
 
     public static void main(String[] args) {

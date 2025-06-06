@@ -46,7 +46,7 @@ public class Application {
 					System.out.print("\n USER: ");
 					String input = scanner.nextLine();
 
-					if (input.equalsIgnoreCase("exit")) {
+					if ("exit".equalsIgnoreCase(input)) {
 						System.out.println("Ending chat session.");
 						break;
 					}

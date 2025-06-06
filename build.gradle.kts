@@ -42,7 +42,10 @@ subprojects {
     tasks.withType<JavaCompile> {
         options.encoding = "UTF-8"
         options.compilerArgs.add("-parameters")
-//        options.release.set(21)
+        options.release.set(21)
+    }
+    tasks.withType<Javadoc> {
+        options.encoding = "UTF-8"
     }
     tasks.named<Test>("test") {
         useJUnitPlatform()

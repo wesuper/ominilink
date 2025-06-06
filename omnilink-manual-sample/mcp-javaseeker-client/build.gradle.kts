@@ -1,5 +1,5 @@
 plugins {
-    id("buildlogic.java-conventions")
+    // id("buildlogic.java-conventions")
     alias(libs.plugins.org.springframework.boot)
     application
 }
@@ -12,7 +12,7 @@ dependencies {
     // Spring AI BOM should be inherited from parent or project if used consistently,
     // but pom.xml doesn't show it. Add if needed for version consistency, or rely on explicit versions.
     // For now, using versions specified in this module's original pom.
-    // implementation(libs.org.springframework.ai.spring.ai.mcp.client.spring.boot.starter) // Removed MCP Starter
+    // implementation(libs.spring.ai.mcp.client.spring.boot.starter) // Removed MCP Starter
     // implementation(libs.com.alibaba.cloud.ai.spring.ai.alibaba.starter) // Removed Alibaba Starter
     implementation(libs.org.springframework.boot.spring.boot.starter)
     implementation(libs.spring.ai.starter.model.openai)

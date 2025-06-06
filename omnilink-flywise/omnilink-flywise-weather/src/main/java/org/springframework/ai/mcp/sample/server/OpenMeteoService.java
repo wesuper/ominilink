@@ -7,7 +7,8 @@ import java.time.format.DateTimeFormatter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-// import org.springframework.ai.tool.annotation.Tool; // Old API
+import org.springframework.ai.tool.annotation.Tool; // Old API
+import org.springframework.ai.tool.annotation.ToolParam;
 // import org.springframework.ai.tool.annotation.ToolParam; // Old API
 import org.springframework.context.annotation.Description; // New API for tool description
 import org.springframework.stereotype.Service;
@@ -102,20 +103,27 @@ public class OpenMeteoService {
      * 获取风向描述
      */
     private String getWindDirection(int degrees) {
-        if (degrees >= 337.5 || degrees < 22.5)
+        if (degrees >= 337.5 || degrees < 22.5) {
             return "北风";
-        if (degrees >= 22.5 && degrees < 67.5)
+        }
+        if (degrees >= 22.5 && degrees < 67.5) {
             return "东北风";
-        if (degrees >= 67.5 && degrees < 112.5)
+        }
+        if (degrees >= 67.5 && degrees < 112.5) {
             return "东风";
-        if (degrees >= 112.5 && degrees < 157.5)
+        }
+        if (degrees >= 112.5 && degrees < 157.5) {
             return "东南风";
-        if (degrees >= 157.5 && degrees < 202.5)
+        }
+        if (degrees >= 157.5 && degrees < 202.5) {
             return "南风";
-        if (degrees >= 202.5 && degrees < 247.5)
+        }
+        if (degrees >= 202.5 && degrees < 247.5) {
             return "西南风";
-        if (degrees >= 247.5 && degrees < 292.5)
+        }
+        if (degrees >= 247.5 && degrees < 292.5) {
             return "西风";
+        }
         return "西北风";
     }
 
@@ -127,10 +135,11 @@ public class OpenMeteoService {
      * @return 指定位置的天气预报
      * @throws RestClientException 如果请求失败
      */
+    @Tool(description = "获取指定经纬度的天气预报")
     @Description("获取指定经纬度的天气预报") // Updated annotation
     public String getWeatherForecastByLocation(
-            /*@Description("纬度")*/ double latitude, // Parameter description handled by name or request object
-            /*@Description("经度")*/ double longitude) { // Parameter description handled by name or request object
+            /*@Description("纬度")*/ @ToolParam(description = "纬度") double latitude, // Parameter description handled by name or request object
+            /*@Description("经度")*/ @ToolParam(description = "经度") double longitude) { // Parameter description handled by name or request object
         // 获取天气数据（当前和未来7天）
         var weatherData = restClient.get()
                 .uri("/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weather_code,wind_speed_10m_max,wind_direction_10m_dominant&timezone=auto&forecast_days=7",

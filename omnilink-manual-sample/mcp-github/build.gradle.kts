@@ -1,5 +1,5 @@
 plugins {
-    id("buildlogic.java-conventions") // Assumed to apply org.springframework.boot and java
+    // id("buildlogic.java-conventions") // Assumed to apply org.springframework.boot and java
     alias(libs.plugins.org.springframework.boot)
     application // For Spring Boot main class auto-detection and standard tasks
 }
@@ -19,9 +19,9 @@ dependencies {
     // implementation(libs.com.alibaba.cloud.ai.spring.ai.alibaba.starter) // Removed Alibaba Starter
 
     // Spring AI MCP
-    // Removed explicit libs.org.springframework.ai.spring.ai.mcp
-    // Removed explicit libs.org.springframework.ai.spring.ai.mcp.core
-    // implementation(libs.org.springframework.ai.spring.ai.mcp.client.spring.boot.starter) // Removed MCP Starter
+    // Removed explicit libs.spring.ai.mcp
+    // Removed explicit libs.spring.ai.mcp.core
+    // implementation(libs.spring.ai.mcp.client.spring.boot.starter) // Removed MCP Starter
     implementation(libs.spring.ai.starter.model.openai) // Add OpenAI Starter
     
     // GitHub API Client

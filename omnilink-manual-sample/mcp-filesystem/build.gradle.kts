@@ -1,5 +1,5 @@
 plugins {
-    id("buildlogic.java-conventions") // Assumed to apply org.springframework.boot and java
+    // id("buildlogic.java-conventions") // Assumed to apply org.springframework.boot and java
     alias(libs.plugins.org.springframework.boot) // Explicitly add for clarity and to ensure it's there
     application // Add application plugin
 }
@@ -20,9 +20,9 @@ dependencies {
     // implementation(libs.com.alibaba.cloud.ai.spring.ai.alibaba.starter) // Removed Alibaba Starter
 
     // Spring AI MCP
-    // Removed libs.org.springframework.ai.spring.ai.mcp
-    // Removed libs.org.springframework.ai.spring.ai.mcp.core
-    // implementation(libs.org.springframework.ai.spring.ai.mcp.client.webflux.spring.boot.starter) // Removed MCP Starter
+    // Removed libs.spring.ai.mcp
+    // Removed libs.spring.ai.mcp.core
+    // implementation(libs.spring.ai.mcp.client.webflux.spring.boot.starter) // Removed MCP Starter
     implementation(libs.org.projectreactor.reactor.core)  // Rely on BOM
     implementation(libs.spring.ai.starter.model.openai) // Add OpenAI Starter
     

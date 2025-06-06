@@ -1,5 +1,5 @@
 plugins {
-    id("buildlogic.java-conventions")
+    // id("buildlogic.java-conventions")
     alias(libs.plugins.org.springframework.boot)
     application
 }
@@ -16,7 +16,7 @@ dependencies {
     implementation(libs.org.springframework.boot.spring.boot.starter)
     // Ensure libs.com.alibaba.cloud.ai.spring.ai.alibaba.starter points to a version compatible with 1.0.0-M5.1
     // implementation(libs.com.alibaba.cloud.ai.spring.ai.alibaba.starter) // Removed Alibaba Starter
-    // implementation(libs.org.springframework.ai.spring.ai.mcp.client.webflux.spring.boot.starter) // Removed MCP starter
+    // implementation(libs.spring.ai.mcp.client.webflux.spring.boot.starter) // Removed MCP starter
     implementation(libs.spring.ai.starter.model.openai)
     implementation(libs.org.springframework.boot.spring.boot.starter.jdbc)
     runtimeOnly(libs.sqlite.jdbc)

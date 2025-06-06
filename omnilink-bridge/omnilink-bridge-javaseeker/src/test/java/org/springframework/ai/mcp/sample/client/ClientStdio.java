@@ -26,7 +26,7 @@ public class ClientStdio {
                         "-Dspring.ai.mcp.server.stdio=true",
                         "-Dspring.main.web-application-type=none",
                         "-Dlogging.pattern.console=",
-                        "spring-ai-alibaba-mcp-example/starter-example/server/starter-stdio-server/target/mcp-stdio-server-exmaple-0.0.1-SNAPSHOT.jar")
+                        "/Users/vincentruan/IdeaProjects/omnilink/omnilink-bridge/omnilink-bridge-javaseeker/build/libs/omnilink-bridge-javaseeker-1.0.0.jar")
                 .build();
 
         var transport = new StdioClientTransport(stdioParams);
