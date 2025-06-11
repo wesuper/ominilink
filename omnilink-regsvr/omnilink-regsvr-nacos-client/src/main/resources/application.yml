@@ -1,42 +1,45 @@
-
 spring:
   application:
-    name: spring-ai-alibaba-nacos-mcp-example
+    name: mcp-nacos-client-example
   ai:
+    openai:
+      api-key: ${AI_DASHSCOPE_API_KEY}
+      base-url: https://api.deepseek.com
+      chat:
+        options:
+          model: deepseek-reasoner
     mcp:
-      server:
-        name: webmvc-mcp-server
+      client:
+        enabled: true
+        name: my-mcp-client
         version: 1.0.0
-        type: ASYNC
-#    dashscope:
-#      api-key: ${AI_DASHSCOPE_API_KEY}
-#      chat:
-#        options:
-#          model: qwen-max-latest
-
+        request-timeout: 30s
+        type: ASYNC  # or ASYNC for reactive applications
     alibaba:
       mcp:
         nacos:
+          namespace: 4ad30fba-bd2c-4c88-b9ac-a22312c682b7
           server-addr: 127.0.0.1:28848
           username: mcp
-          password: 'Nacos31234!@#$'
-          registry:
-            enabled: true
-            service-group: DEFAULT_GROUP
-            service-name: public
-          endpoint:
-#          dynamic:
-#            service-group:
-#              - DEFAULT_GROUP
-#            service-names:
-#              - public
+          password: ${MCP_PASSWD}
+#          registry:
+#            enabled: true
+#            service-group: DEFAULT_GROUP
+#            service-name: public
 
-server:
-  port: 8080
+          client:
+            enabled: true
+            sse:
+              connections:
+                server1:
+                  # {spring.ai.mcp.server.name}::{spring.ai.mcp.server.version}
+                  service-name: webmvc-mcp-server::1.0.0
+#                  version: 1.0.0
+  main:
+    web-application-type: none
+
+# 调试日志
 logging:
-  charset:
-    console: utf-8
   level:
-    root: info
-    org.springframework: info
-    com.alibaba.nacos.common.remote.client: debug
+    com.alibaba.nacos: debug
+    io.modelcontextprotocol: debug

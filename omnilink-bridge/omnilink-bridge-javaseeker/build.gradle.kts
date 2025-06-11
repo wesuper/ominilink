@@ -14,10 +14,10 @@ application {
 
 dependencies {
     // api(libs.spring.ai.mcp.server.spring.boot.starter) // Removed MCP Starter
-    implementation(platform(libs.spring.ai.bom)) // Explicitly apply Spring AI BOM for troubleshooting
+//    implementation(platform(libs.spring.ai.bom)) // Explicitly apply Spring AI BOM for troubleshooting
     api(libs.org.springframework.spring.web)
-    implementation(libs.org.springframework.boot.spring.boot.starter)
-    implementation(libs.org.springframework.boot.spring.boot.starter.web) // For RestClient and Jackson
+//    implementation(libs.org.springframework.boot.spring.boot.starter)
+//    implementation(libs.org.springframework.boot.spring.boot.starter.web) // For RestClient and Jackson
     // implementation("org.springframework.ai:spring-ai-core:1.0.0") // Removed direct spring-ai-core
     implementation(libs.spring.ai.mcp.server) // Use corrected OpenAI starter alias
     implementation(libs.spring.boot.starter.logging)

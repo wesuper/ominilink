@@ -1,4 +1,4 @@
-package com.alibaba.cloud.ai.example.mcp.streamable;
+package org.wesuper.liteai.regsvr.nacos3.mcp.streamable;
 
 import org.springframework.ai.chat.client.ChatClient;
 // import org.springframework.ai.tool.ToolCallbackProvider; // Old API, tools are registered differently

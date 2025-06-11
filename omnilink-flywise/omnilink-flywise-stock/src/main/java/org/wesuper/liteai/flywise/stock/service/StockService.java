@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -63,7 +64,7 @@ public class StockService {
     ) implements Serializable {
     }
 
-    @Description("Get real-time stock information for the specified stock code") // Updated annotation
+    @Tool(description = "Get real-time stock information for the specified stock code") // Updated annotation
     public StockInfo getStockInfo(String stockCode) { // Parameter description can be handled by name or request object
         try {
             // Validate stock code format

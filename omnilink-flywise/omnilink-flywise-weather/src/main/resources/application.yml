@@ -1,27 +1,31 @@
 # NOTE: You must disable the banner and the console logging
 # to allow the STDIO transport to work !!!
+server:
+  port: 8090
 spring:
   main:
     banner-mode: off
-#    web-application-type: reactive
+#    web-application-type: servlet
   ai:
     mcp:
       server:
         name: my-weather-server
         version: 0.0.1
-        type: sync
+        type: async
         enabled: true
         instructions: This reactive server provides weather information tools and resources
         sse-endpoint: /sse
         sse-message-endpoint: /mcp/message
-        base-url: /api/v1
+        # base-url not supported now
+        # base-url: /api/v1
         capabilities:
           tool: true
           resource: true
           prompt: true
           completion: true
         stdio: false
-
+  jackson:
+    time-zone: Asia/Shanghai
 # logging.pattern.console=
 logging:
   charset:

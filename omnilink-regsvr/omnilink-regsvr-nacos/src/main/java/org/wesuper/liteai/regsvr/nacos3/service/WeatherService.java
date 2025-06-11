@@ -1,4 +1,4 @@
-package com.alibaba.cloud.ai.example.service;
+package org.wesuper.liteai.regsvr.nacos3.service;
 
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.stereotype.Service;

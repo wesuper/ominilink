@@ -24,4 +24,8 @@ project(":omnilink-regsvr:omnilink-regsvr-nacos") {
         enabled = true
         mainClass.set("com.alibaba.cloud.ai.example.Application")
     }
-} 
+}
+
+dependencies {
+    implementation(platform(libs.spring.ai.alibaba.bom))
+}

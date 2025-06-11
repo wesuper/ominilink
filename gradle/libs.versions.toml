@@ -4,7 +4,7 @@
 [versions]
 java = "21"
 springAi = "1.0.0" # Updated Spring AI version
-# Removed springAiAlibaba and springAiAlibabaM51 versions
+springAiAlibaba = "1.0.0.2"
 springBoot = "3.5.0" # Updated Spring Boot version
 # Versions for existing libs from original file
 # Removed MCP server starter versions as these artifacts might not exist for Spring AI 1.0.0
@@ -25,8 +25,8 @@ org-springframework-boot-spring-boot-starter-webflux = { module = "org.springfra
 org-springframework-boot-spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" } # For potential JPA use with SQLite
 org-springframework-boot-spring-boot-starter-jdbc = { module = "org.springframework.boot:spring-boot-starter-jdbc" } # Version from BOM
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
-spring-boot-starter-logging = {module = "org.springframework.boot:spring-boot-starter-logging"}
-spring-boot-starter-actuator = {module = "org.springframework.boot:spring-boot-starter-actuator"}
+spring-boot-starter-logging = { module = "org.springframework.boot:spring-boot-starter-logging" }
+spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
 
 # Spring AI
 spring-ai-bom = { module = "org.springframework.ai:spring-ai-bom", version.ref = "springAi" }
@@ -34,6 +34,7 @@ spring-ai-bom = { module = "org.springframework.ai:spring-ai-bom", version.ref =
 spring-ai-starter-model-openai = { module = "org.springframework.ai:spring-ai-starter-model-openai", version.ref = "springAi" } # Corrected artifactId and using BOM version
 org-springframework-ai-spring-ai-model = { module = "org.springframework.ai:spring-ai-model" } # Version from BOM
 spring-ai-starter-model-chat-memory = { module = "org.springframework.ai:spring-ai-starter-model-chat-memory", version.ref = "springAi" } # For InMemoryChatMemory
+spring-ai-autoconfigure-model-chat-client = { module = "org.springframework.ai:spring-ai-autoconfigure-model-chat-client", version.ref = "springAi" } # For InMemoryChatMemory
 
 spring-ai-mcp = { module = "org.springframework.ai:spring-ai-mcp" } # Version from BOM
 org-springframework-ai-spring-ai-mcp-core = { module = "org.springframework.ai:spring-ai-mcp-core" } # Version from BOM
@@ -41,10 +42,10 @@ org-springframework-ai-spring-ai-mcp-client = { module = "org.springframework.ai
 # Removed MCP starter aliases as these artifacts might not exist for Spring AI 1.0.0 or are restructured
 # org-springframework-ai-spring-ai-mcp-client-spring-boot-starter = { module = "org.springframework.ai:spring-ai-mcp-client-spring-boot-starter", version.ref = "springAi" }
 # org-springframework-ai-spring-ai-mcp-client-webflux-spring-boot-starter = { module = "org.springframework.ai:spring-ai-mcp-client-webflux-spring-boot-starter", version.ref = "springAi" }
-spring-ai-mcp-server = { module = "org.springframework.ai:spring-ai-starter-mcp-server" }
+spring-ai-mcp-server = { module = "org.springframework.ai:spring-ai-starter-mcp-server", version.ref = "springAi" }
 
-spring-ai-mcp-server-webmvc = { module = "org.springframework.ai:spring-ai-starter-mcp-server-webmvc", version.ref="springAi"}
-spring-ai-mcp-server-webflux = { module = "org.springframework.ai:spring-ai-starter-mcp-server-webflux", version.ref="springAi"}
+spring-ai-mcp-server-webmvc = { module = "org.springframework.ai:spring-ai-starter-mcp-server-webmvc", version.ref = "springAi" }
+spring-ai-mcp-server-webflux = { module = "org.springframework.ai:spring-ai-starter-mcp-server-webflux", version.ref = "springAi" }
 # org-springframework-ai-spring-ai-mcp-server-webmvc-spring-boot-starter = { module = "org.springframework.ai:spring-ai-mcp-server-webmvc-spring-boot-starter", version.ref = "springAi" }
 org-springframework-ai-spring-ai-tool-spring-boot-starter = { module = "org.springframework.ai:spring-ai-tool-spring-boot-starter" }
 spring-ai-advisors-vector-store = { module = "org.springframework.ai:spring-ai-advisors-vector-store" }
@@ -56,6 +57,14 @@ org-springframework-spring-web = { module = "org.springframework:spring-web" } #
 commons-io = { module = "commons-io:commons-io", version.ref = "commonsIo" }
 kohsuke-github-api = { module = "org.kohsuke:github-api", version.ref = "kohsukeGithubApi" }
 org-projectreactor-reactor-core = { module = "io.projectreactor:reactor-core" } # Version from Spring Boot BOM
+
+# spring alibaba ai
+spring-ai-alibaba-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-bom", version.ref = "springAiAlibaba" }
+spring-ai-alibaba-starter = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-starter", version.ref = "springAiAlibaba" }
+# MCP Nacos 注册支持
+spring-ai-alibaba-mcp-nacos = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-mcp-nacos", version.ref = "springAiAlibaba" }
+spring-ai-alibaba-mcp-server-nacos = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-starter-nacos-mcp-server", version.ref = "springAiAlibaba" }
+spring-ai-alibaba-mcp-client-nacos = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-starter-nacos-mcp-client", version.ref = "springAiAlibaba" }
 
 # For SQLite
 sqlite-jdbc = { module = "org.xerial:sqlite-jdbc", version = "3.43.0.0" } # Example version

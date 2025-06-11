@@ -3,7 +3,6 @@
  */
 
 plugins {
-    // id("buildlogic.java-conventions")
     alias(libs.plugins.org.springframework.boot)
     application
 }
@@ -13,11 +12,9 @@ application {
 }
 
 dependencies {
-    // api(libs.spring.ai.mcp.server.spring.boot.starter) // Removed MCP Starter
-    // api(libs.org.springframework.spring.web) // Replaced by spring-boot-starter-web
-    implementation(libs.org.springframework.boot.spring.boot.starter)
-    implementation(libs.org.springframework.boot.spring.boot.starter.web)
-    implementation(libs.spring.ai.starter.model.openai)
+    implementation(libs.spring.ai.mcp.server.webflux)
+    implementation(libs.spring.boot.starter.logging)
+    implementation(libs.spring.boot.starter.actuator)
 }
 
 description = "omnilink-flywise-stock"

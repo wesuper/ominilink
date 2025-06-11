@@ -8,14 +8,14 @@ MCP Server 注册到 Nacos 中，并通过注解式工具（Tool）提供服务�
 ```xml
 <!-- MCP Nacos 注册 -->
 <dependency>
-    <groupId>org.wesuper.ailite</groupId>
+    <groupId>org.wesuper.liteai</groupId>
     <artifactId>spring-ai-alibaba-mcp-nacos</artifactId>
     <version>1.0.0-M6.1-SNAPSHOT</version>
 </dependency>
 
         <!-- MCP Server (WebMVC) -->
 <dependency>
-<groupId>org.wesuper.ailite</groupId>
+<groupId>org.wesuper.liteai</groupId>
 <artifactId>spring-ai-alibaba-starter</artifactId>
 <version>${spring-ai-alibaba.version}</version>
 </dependency>

@@ -15,7 +15,7 @@ plugins {
 }
 
 allprojects {
-    group = "org.wesuper.ailite"
+    group = "org.wesuper.liteai"
     version = "1.0.0"
 
     // Repositories are now defined in settings.gradle.kts
@@ -54,6 +54,8 @@ subprojects {
     // Removed extra properties for versions, should come from libs.versions.toml via aliases
 
     dependencies {
+        implementation(platform(rootProject.project.libs.spring.boot.dependencies))
+        implementation(platform(rootProject.project.libs.spring.ai.bom))
         // BOMs (spring-boot-dependencies, spring-ai-bom) are now applied via
         // the buildlogic.java-conventions plugin for projects that use it.
         // No need to apply them globally here if all relevant projects use that convention.

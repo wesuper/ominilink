@@ -2,8 +2,12 @@ package org.wesuper.liteai.flywise.weather;
 
 // import org.springframework.ai.tool.ToolCallbackProvider; // Old API
 // import org.springframework.ai.tool.method.MethodToolCallbackProvider; // Old API
+
+import org.springframework.ai.tool.ToolCallbackProvider;
+import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 // import org.springframework.context.annotation.Bean; // Bean for tools might be handled differently or auto-configured
 //import org.springframework.ai.model.openai.autoconfigure.OpenAiAudioSpeechAutoConfiguration;
 //import org.springframework.ai.model.openai.autoconfigure.OpenAiChatAutoConfiguration;
@@ -33,9 +37,9 @@ public class McpServerApplication {
     // Since this module is defining a tool for others to call, simply being a @Service might be enough
     // for frameworks that consume it if they use component scanning and look for @Description.
     // Commenting out this explicit ToolProvider bean as its API is from older milestones.
-    // @Bean
-    // public ToolCallbackProvider weatherTools(OpenMeteoService openMeteoService) {
-    // return MethodToolCallbackProvider.builder().toolObjects(openMeteoService).build(); // Old API
-    // }
+    @Bean
+    public ToolCallbackProvider weatherTools(OpenMeteoService openMeteoService) {
+        return MethodToolCallbackProvider.builder().toolObjects(openMeteoService).build();
+    }
 
 }
