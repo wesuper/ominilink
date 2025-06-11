@@ -1,4 +1,4 @@
-package org.wesuper.liteai.flywise.weather;
+package org.wesuper.liteai.bridge.javaseeker;
 
 // import org.springframework.ai.tool.ToolCallbackProvider; // Old API
 // import org.springframework.ai.tool.method.MethodToolCallbackProvider; // Old API
@@ -8,6 +8,7 @@ import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.wesuper.liteai.bridge.weather.OpenMeteoService;
 // import org.springframework.context.annotation.Bean; // Bean for tools might be handled differently or auto-configured
 //import org.springframework.ai.model.openai.autoconfigure.OpenAiAudioSpeechAutoConfiguration;
 //import org.springframework.ai.model.openai.autoconfigure.OpenAiChatAutoConfiguration;
@@ -26,10 +27,10 @@ import org.springframework.context.annotation.Bean;
 //    OpenAiModerationAutoConfiguration.class
 //})
 @SpringBootApplication
-public class McpServerApplication {
+public class JavaSeekerMcpServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(McpServerApplication.class, args);
+        SpringApplication.run(JavaSeekerMcpServerApplication.class, args);
     }
 
     // Spring AI 1.0.0 typically auto-registers @Service beans that implement java.util.function.Function as tools,

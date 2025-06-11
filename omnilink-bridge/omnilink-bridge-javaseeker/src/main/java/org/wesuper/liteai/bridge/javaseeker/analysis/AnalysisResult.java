@@ -1,4 +1,4 @@
-package com.example.mcp.analysis;
+package org.wesuper.liteai.bridge.javaseeker.analysis;
 
 import java.util.List;
 import java.util.Objects;

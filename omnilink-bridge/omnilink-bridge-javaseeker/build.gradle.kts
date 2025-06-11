@@ -9,7 +9,7 @@ plugins {
 }
 
 application {
-    mainClass.set("org.springframework.ai.mcp.sample.server.McpServerApplication")
+    mainClass.set("org.wesuper.liteai.bridge.JavaSeekerMcpServerApplication")
 }
 
 dependencies {
@@ -25,6 +25,9 @@ dependencies {
     implementation(libs.spring.boot.starter.actuator)
     // implementation("io.modelcontextprotocol:modelcontextprotocol-client")
     // implementation("io.modelcontextprotocol:modelcontextprotocol-spec")
+    implementation(libs.spoon.core) // Spoon for AST analysis
+    implementation(libs.jgit) // Added JGit dependency
+    testImplementation(libs.spring.boot.starter.test)
 }
 
 description = "omnilink-bridge-javaseeker"

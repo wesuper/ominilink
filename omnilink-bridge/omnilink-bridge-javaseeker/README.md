@@ -1,126 +1,176 @@
-# Spring AI MCP STDIO 服务器示例
+```markdown
+# Omnilink Bridge - JavaSeeker MCP Server
 
-这个项目展示了如何使用 Spring AI 的 Model Context Protocol (MCP) 创建一个基于标准输入/输出（STDIO）的服务器应用程序。该服务器提供天气预报和空气质量信息的工具，可以被 MCP 客户端调用。
+The `omnilink-bridge-javaseeker` module provides a Model Code Provider (MCP) server designed for advanced code analysis of Java projects. It leverages Abstract Syntax Tree (AST) parsing to identify and extract code contexts for references related to a specified code snippet (class or method). This service is intended to supply detailed code information to Large Language Models (LLMs) for further processing and understanding.
 
-## 项目概述
+## Architecture Overview
 
-本项目是一个基于 Spring Boot 的应用程序，它实现了 MCP 服务器，通过标准输入/输出（STDIO）与客户端通信。这种通信方式使得服务器可以作为子进程被客户端启动和管理，非常适合嵌入式场景。
+The JavaSeeker MCP server is built using Java 21, Spring Boot 3.x, and Spoon for AST analysis.
 
-主要功能：
-- 提供天气预报查询工具
-- 提供空气质量信息查询工具（模拟数据）
-- 通过 STDIO 与客户端进行通信
+**Key Components:**
 
-## 技术栈
+1.  **`McpController` (`org.wesuper.liteai.bridge.javaseeker.web.McpController`)**:
+    *   Exposes a REST API endpoint (`/api/mcp/analyze`) to receive analysis requests.
+    *   Handles incoming requests, validates parameters, and orchestrates the analysis workflow.
 
-- Spring Boot
-- Spring AI MCP Server
-- Spring Web (用于 HTTP 客户端)
-- Model Context Protocol (MCP)
+2.  **`ProjectLoaderService` (`org.wesuper.liteai.bridge.javaseeker.project.ProjectLoaderService`)**:
+    *   Manages the loading and caching of Java projects.
+    *   Supports loading projects from:
+        *   **Local Directories**: Specified by a file system path.
+        *   **Git Repositories**: Specified by a Git URL and an optional branch name. (Uses JGit for cloning).
+    *   `ProjectSource` (interface), `LocalProjectSource`, `GitProjectSource` (implementations) define the abstraction for project sources.
 
-## 项目结构
+3.  **`CodeAnalysisService` (`org.wesuper.liteai.bridge.javaseeker.analysis.CodeAnalysisService`)**:
+    *   Interface for code analysis operations.
+    *   `SpoonAnalysisService` is the primary implementation, utilizing the [Spoon](https://spoon.gforge.inria.fr/) library.
 
+4.  **`SpoonAnalysisService` (`org.wesuper.liteai.bridge.javaseeker.analysis.SpoonAnalysisService`)**:
+    *   Parses the specified Java project to build an AST.
+    *   Locates the AST node corresponding to the input `codeSnippet`.
+    *   Traverses the AST to find:
+        *   References *to* the target code snippet from other parts of the project or dependencies.
+        *   References *from* the target code snippet to other parts of the project or dependencies (e.g., method calls, type usages).
+    *   Extracts the full source code of the containing method or class for each identified reference.
+    *   Attempts to configure Spoon's classpath based on common project layouts (e.g., `target/classes`, `build/classes`, `target/dependency`) to improve type resolution.
+
+**Workflow:**
+
+1.  An HTTP POST request is sent to `/api/mcp/analyze` with project details and the code snippet to analyze.
+2.  `McpController` receives the request.
+3.  `ProjectLoaderService` is invoked to load the Java project. If the project is from Git, it's cloned into a temporary directory. Local projects are accessed directly.
+4.  `SpoonAnalysisService` is called with the loaded project and the code snippet.
+5.  Spoon parses the project's source code (and attempts to use available classpath information for better type resolution).
+6.  The service identifies the target element (class or method).
+7.  It then searches for all references to and from this element across the codebase (including known parts of dependencies if Spoon can resolve them).
+8.  For each reference, the source code of the method or class containing the reference (or being referenced) is extracted.
+9.  The results are compiled into an `AnalysisResult` object and returned as a JSON response.
+
+## Configuration & Setup
+
+### Prerequisites
+
+*   Java Development Kit (JDK) 21 or newer.
+*   Git client (for cloning repositories).
+*   The application is a Spring Boot application and can be run as a standard JAR.
+
+### Project Configuration
+
+The service itself requires no specific external configuration files beyond what's needed to run a Spring Boot application. Project details are provided via the API request.
+
+**Dependency Management:**
+
+*   The project uses Gradle with Kotlin DSL.
+*   Dependencies, including Spring Boot, Spring AI, and Spoon, are managed via `build.gradle.kts` and `gradle/libs.versions.toml`.
+
+### Running the Service
+
+1.  Build the module:
+    ```bash
+    ./gradlew :omnilink-bridge-javaseeker:bootJar
+    ```
+2.  Run the application:
+    ```bash
+    java -jar omnilink-bridge-javaseeker/build/libs/omnilink-bridge-javaseeker-0.0.1-SNAPSHOT.jar
+    ```
+    The server will typically start on port 8080.
+
+## API Usage
+
+### Endpoint: `POST /api/mcp/analyze`
+
+Analyzes a Java project for references related to a given code snippet.
+
+**Request Body (JSON):**
+
+```json
+{
+  "projectName": "my-java-app",
+  "sourceIdentifier": "/path/to/local/my-java-app", // or "https://github.com/user/my-java-app.git"
+  "branchName": "main", // Optional, for Git sources
+  "codeSnippet": "com.example.MyService#processData(java.lang.String,int)" // or "com.example.MyOtherClass"
+}
 ```
-starter-stdio-server/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── org/springframework/ai/mcp/sample/server/
-│   │   │       ├── McpServerApplication.java  # 应用程序入口
-│   │   │       └── OpenMeteoService.java      # 天气服务实现
-│   │   └── resources/
-│   │       └── application.properties         # 应用配置
-│   └── test/
-│       └── java/
-│           └── org/springframework/ai/mcp/sample/client/
-│               └── ClientStdio.java           # 客户端测试类
-└── pom.xml                                    # Maven 配置
+
+**Parameters:**
+
+*   `projectName` (String, required): A unique identifier for the target project. Used for caching and management.
+*   `sourceIdentifier` (String, required): The location of the project.
+    *   For local projects: Absolute path to the project's root directory.
+    *   For Git projects: The HTTPS or SSH URL of the Git repository.
+*   `branchName` (String, optional): The specific branch to check out if the `sourceIdentifier` is a Git repository. Defaults to the repository's default branch (e.g., `main` or `master`) if not specified by JGit.
+*   `codeSnippet` (String, required): The fully qualified name of a class or a specific method signature to be analyzed.
+    *   Class example: `com.example.MyClass`
+    *   Method example: `com.example.MyClass#myMethod(String, int)` or `com.example.MyClass#myMethod()` (ensure parameter types are simple names or fully qualified as they appear in the source, e.g., `String` not `java.lang.String` if not imported that way in the method signature context of Spoon).
+
+**Response Body (JSON on Success - Status 200 OK):**
+
+```json
+{
+  "analysisTarget": "com.example.MyService#processData(java.lang.String,int)",
+  "references": [
+    {
+      "source": "self", // "self", "dependency:guava-32.1.2-jre.jar", or "jdk"
+      "fullyQualifiedName": "com.example.another.SomeOtherClass#someMethod()",
+      "codeContext": "public void someMethod() {\n    // ...\n    new MyService().processData(\"test\", 123);\n    // ...\n}"
+    },
+    {
+      "source": "dependency:another-lib-1.0.jar",
+      "fullyQualifiedName": "com.thirdparty.HelperUtil#staticHelper(com.example.MyService)",
+      "codeContext": "public static void staticHelper(MyService service) {\n    // ... code from the dependency ...\n}"
+    },
+    {
+      "source": "self", // Reference *from* MyService#processData
+      "fullyQualifiedName": "com.example.internal.DataProcessor#handle(java.lang.String)",
+      "codeContext": "public class MyService {\n    //...\n    public void processData(String s, int i) {\n        new DataProcessor().handle(s);\n    }\n    //...\n}"
+    }
+    // ... more references
+  ]
+}
 ```
 
-## 核心组件
+**Fields in `references` array:**
 
-### McpServerApplication
+*   `source` (String): Indicates the origin of the referenced code.
+    *   `"self"`: The reference is within the analyzed project itself.
+    *   `"dependency:<jar_name>"`: The reference is from a dependency JAR (e.g., `dependency:guava-32.1.2-jre.jar`). The name is derived from the JAR file.
+    *   `"jdk"`: The reference is to a core JDK class.
+*   `fullyQualifiedName` (String): The fully qualified name of the class or method that either *contains* the reference (if looking for references *to* the target) or *is* the reference itself (if looking for references *from* the target).
+*   `codeContext` (String): The complete source code of the method or class associated with this reference.
+    *   If the reference is *to* the `analysisTarget`: `codeContext` is the source of the method/class *containing* the call/usage of the `analysisTarget`.
+    *   If the reference is *from* the `analysisTarget`: `codeContext` is the source of the `analysisTarget` itself (showing where the call *is made from*), and `fullyQualifiedName` is the item being called/used.
 
-应用程序的入口点，配置了 Spring Boot 应用并注册了天气工具服务。
+**Error Responses:**
 
-### OpenMeteoService
+*   **400 Bad Request**: If required request parameters are missing or invalid.
+    ```json
+    "Missing required fields: projectName, sourceIdentifier, codeSnippet"
+    ```
+*   **500 Internal Server Error**: If there's an issue loading the project or an unexpected error during the analysis process.
+    ```json
+    "Failed to load project: my-java-app from /path/to/local/my-java-app"
+    ```
+    ```json
+    "An error occurred during code analysis: <specific error message>"
+    ```
 
-提供天气相关的工具实现：
-- `getWeatherForecastByLocation`: 根据经纬度获取天气预报
-- `getAirQuality`: 根据经纬度获取空气质量信息（模拟数据）
+### Example cURL Request
 
-这些方法使用 `@Tool` 注解标记，使它们可以被 MCP 客户端发现和调用。
-
-## 配置说明
-
-在 `application.properties` 中：
-
-```properties
-spring.main.web-application-type=none
-spring.main.banner-mode=off
-logging.pattern.console=
-
-spring.ai.mcp.server.name=my-weather-server
-spring.ai.mcp.server.version=0.0.1
-```
-
-注意：
-- 必须禁用 web 应用类型
-- 必须禁用 banner 和控制台日志，以确保 STDIO 传输正常工作
-
-## 如何使用
-
-### 构建项目
-
+**Local Project:**
 ```bash
-./mvnw clean install -DskipTests
+curl -X POST -H "Content-Type: application/json" -d '{
+  "projectName": "my-local-project",
+  "sourceIdentifier": "/Users/jules/dev/sample-java-project",
+  "codeSnippet": "com.example.Main#main(java.lang.String[])"
+}' http://localhost:8080/api/mcp/analyze
 ```
 
-### 客户端示例
-
-参考 `ClientStdio.java` 中的示例代码，了解如何创建客户端并调用服务器提供的工具：
-
-```java
-var stdioParams = ServerParameters.builder("java")
-        .args("-jar", "target/mcp-stdio-server-exmaple-0.0.1-SNAPSHOT.jar")
-        .build();
-
-var transport = new StdioClientTransport(stdioParams);
-var client = McpClient.sync(transport).build();
-
-client.initialize();
-
-// 列出可用工具
-ListToolsResult toolsList = client.listTools();
-
-// 调用天气预报工具
-CallToolResult weatherForecastResult = client.callTool(
-    new CallToolRequest("getWeatherForecastByLocation", 
-    Map.of("latitude", "39.9042", "longitude", "116.4074"))
-);
-
-// 调用空气质量工具
-CallToolResult airQualityResult = client.callTool(
-    new CallToolRequest("getAirQuality", 
-    Map.of("latitude", "39.9042", "longitude", "116.4074"))
-);
-
-client.closeGracefully();
+**Git Project:**
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{
+  "projectName": "spring-petclinic",
+  "sourceIdentifier": "https://github.com/spring-projects/spring-petclinic.git",
+  "branchName": "main",
+  "codeSnippet": "org.springframework.samples.petclinic.owner.OwnerController#initCreationForm(java.util.Map)"
+}' http://localhost:8080/api/mcp/analyze
 ```
-
-## 注意事项
-
-1. 服务器使用 OpenMeteo 的免费天气 API，无需 API 密钥
-2. 空气质量数据为模拟数据，实际应用中应替换为真实 API
-3. 使用 STDIO 传输时，必须禁用控制台日志和 banner，否则会干扰通信
-
-## 扩展开发
-
-如需添加新的工具，只需：
-1. 创建新的服务类
-2. 使用 `@Tool` 注解标记方法
-3. 在 `McpServerApplication` 中注册服务
-
-## 许可证
-
-Apache License 2.0 
+```

@@ -1,7 +1,7 @@
-package com.example.mcp.analysis;
+package org.springframework.ai.mcp.sample.client.mcp.analysis;
 
-import com.example.mcp.project.LocalProjectSource;
-import com.example.mcp.project.ProjectSource;
+import org.wesuper.liteai.bridge.javaseeker.project.LocalProjectSource;
+import org.wesuper.liteai.bridge.javaseeker.project.ProjectSource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;

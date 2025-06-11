@@ -1,4 +1,4 @@
-package com.example.mcp.project;
+package org.wesuper.liteai.bridge.javaseeker.project;
 
 import org.springframework.stereotype.Service;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package org.wesuper.liteai.flywise.weather;
+package org.wesuper.liteai.bridge.weather;
 
 import java.util.List;
 import java.time.LocalDate;

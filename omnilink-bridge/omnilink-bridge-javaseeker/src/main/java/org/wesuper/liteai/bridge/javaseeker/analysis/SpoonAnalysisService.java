@@ -1,6 +1,6 @@
-package com.example.mcp.analysis;
+package org.wesuper.liteai.bridge.javaseeker.analysis;
 
-import com.example.mcp.project.ProjectSource;
+import org.wesuper.liteai.bridge.javaseeker.project.ProjectSource;
 import org.springframework.stereotype.Service;
 import spoon.Launcher;
 import spoon.CtModel;
@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Arrays;
 import java.io.IOException;
 
 
@@ -297,7 +296,7 @@ public class SpoonAnalysisService implements CodeAnalysisService {
             if (filePath.contains(".jar" + File.separator) || filePath.endsWith(".jar")) { // Check if path indicates it's from a JAR
                  // Try to get a meaningful name for the JAR
                 referencedSourceKey = Paths.get(filePath).getFileName().toString();
-                if(referencedSourceKey.matches(".*-[0-9].*\.jar")) { // Heuristic for typical maven jar names like artifact-version.jar
+                if(referencedSourceKey.matches(".*-[0-9].*\\.jar")) { // Heuristic for typical maven jar names like artifact-version.jar
                     referencedSourceKey = "dependency:" + referencedSourceKey.substring(0, referencedSourceKey.lastIndexOf('-'));
                 } else {
                     referencedSourceKey = "dependency:" + referencedSourceKey;
