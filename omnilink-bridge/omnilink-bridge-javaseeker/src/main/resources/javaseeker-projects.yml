@@ -1,0 +1,12 @@
+projects:
+  - name: "sample-git-project"
+    sourceType: "git"
+    location: "https://github.com/spring-projects/spring-petclinic.git" # Example public repo
+    branch: "main"
+    localCachePath: ".cache/spring-petclinic" # Relative to app execution dir, will be made absolute
+    status: "NOT_SYNCED"
+  - name: "sample-local-project"
+    sourceType: "local"
+    location: "/path/to/your/local/java-project" # Needs to be an actual path on your system for testing
+    localCachePath: "/path/to/your/local/java-project" # For local, location and cache can be same
+    status: "READY" # Assuming local projects are initially ready or don't need sync/compile via this tool

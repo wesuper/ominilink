@@ -9,10 +9,17 @@ plugins {
 }
 
 application {
-    mainClass.set("org.wesuper.liteai.bridge.JavaSeekerMcpServerApplication")
+    mainClass.set("com.omnilink.bridge.javaseeker.McpJavaSeekerApplication")
 }
 
 dependencies {
+    testImplementation(libs.mockito.junit.jupiter)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.spring.boot.starter.test)
+    implementation(libs.spoon.core)
+    implementation(libs.jgit)
+    implementation("org.springframework:spring-context-support")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.3")
     // api(libs.spring.ai.mcp.server.spring.boot.starter) // Removed MCP Starter
 //    implementation(platform(libs.spring.ai.bom)) // Explicitly apply Spring AI BOM for troubleshooting
 //    api(libs.org.springframework.spring.web)
@@ -25,13 +32,10 @@ dependencies {
     implementation(libs.spring.boot.starter.actuator)
     // implementation("io.modelcontextprotocol:modelcontextprotocol-client")
     // implementation("io.modelcontextprotocol:modelcontextprotocol-spec")
-    implementation(libs.spoon.core) // Spoon for AST analysis
-    implementation(libs.jgit) // Added JGit dependency
-    testImplementation(libs.spring.boot.starter.test)
 }
 
 description = "omnilink-bridge-javaseeker"
 
 tasks.named<Test>("test") {
-    enabled = false
+    useJUnitPlatform()
 }

@@ -1,35 +1,14 @@
-# NOTE: You must disable the banner and the console logging
-# to allow the STDIO transport to work !!!
-server:
-  port: 8090
 spring:
   main:
+    web-application-type: none
     banner-mode: off
-  #    web-application-type: servlet
   ai:
     mcp:
       server:
-        name: java-seeker-server
+        name: my-weather-server
         version: 0.0.1
-        type: async
-        enabled: true
-        instructions: This reactive server provides java project information tools and resources
-        sse-endpoint: /sse
-        sse-message-endpoint: /mcp/message
-        # base-url not supported now
-        # base-url: /api/v1
-        capabilities:
-          tool: true
-          resource: true
-          prompt: true
-          completion: true
-        stdio: false
-  jackson:
-    time-zone: Asia/Shanghai
-# logging.pattern.console=
-logging:
-  charset:
-    console: utf-8
-  level:
-    root: info
-    org.springframework: debug
+        type: sync
+        stdio: true
+
+# NOTE: You must disable the banner and the console logging
+# to allow the STDIO transport to work !!!
