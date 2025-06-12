@@ -1,4 +1,4 @@
-package com.example.mcp.project;
+package org.wesuper.liteai.bridge.javaseeker.project;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

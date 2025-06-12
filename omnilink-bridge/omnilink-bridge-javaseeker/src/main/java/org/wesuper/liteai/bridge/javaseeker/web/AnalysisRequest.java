@@ -1,4 +1,4 @@
-package com.example.mcp.web;
+package org.wesuper.liteai.bridge.javaseeker.web;
 
 // Can use records for concise DTOs if preferred, or standard classes with getters/setters.
 // Using a class here for broader compatibility/understanding.

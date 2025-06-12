@@ -26,13 +26,13 @@ subprojects {
 project(":omnilink-flywise:omnilink-flywise-stock") {
     tasks.bootJar {
         enabled = true
-        mainClass.set("com.alibaba.spring.ai.example.stock.StockServerApplication")
+        mainClass.set("org.wesuper.liteai.flywise.stock.StockServerApplication")
     }
 }
 
 project(":omnilink-flywise:omnilink-flywise-weather") {
     tasks.bootJar {
         enabled = true
-        mainClass.set("org.springframework.ai.mcp.sample.server.McpServerApplication")
+        mainClass.set("org.wesuper.liteai.flywise.weather.McpServerApplication")
     }
 } 

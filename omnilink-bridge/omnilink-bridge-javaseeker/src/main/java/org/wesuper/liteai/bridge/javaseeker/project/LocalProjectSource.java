@@ -1,4 +1,4 @@
-package com.example.mcp.project;
+package org.wesuper.liteai.bridge.javaseeker.project;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

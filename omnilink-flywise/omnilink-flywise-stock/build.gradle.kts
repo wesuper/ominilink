@@ -8,7 +8,7 @@ plugins {
 }
 
 application {
-    mainClass.set("com.alibaba.spring.ai.example.stock.StockServerApplication")
+    mainClass.set("org.wesuper.liteai.flywise.stock.StockServerApplication")
 }
 
 dependencies {

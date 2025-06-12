@@ -25,6 +25,6 @@ subprojects {
 project(":omnilink-bridge:omnilink-bridge-javaseeker") {
     tasks.bootJar {
         enabled = true
-        mainClass.set("org.springframework.ai.mcp.sample.server.McpServerApplication")
+        mainClass.set("org.wesuper.liteai.bridge.javaseeker.McpJavaSeekerApplication")
     }
 } 

@@ -1,4 +1,4 @@
-package com.example.mcp.project;
+package org.wesuper.liteai.bridge.javaseeker.project;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;

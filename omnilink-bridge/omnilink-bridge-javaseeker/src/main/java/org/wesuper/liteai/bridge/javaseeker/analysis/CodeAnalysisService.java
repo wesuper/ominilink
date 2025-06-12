@@ -1,6 +1,6 @@
-package com.example.mcp.analysis;
+package org.wesuper.liteai.bridge.javaseeker.analysis;
 
-import com.example.mcp.project.ProjectSource;
+import org.wesuper.liteai.bridge.javaseeker.project.ProjectSource;
 import java.util.List;
 import java.util.Map;
 

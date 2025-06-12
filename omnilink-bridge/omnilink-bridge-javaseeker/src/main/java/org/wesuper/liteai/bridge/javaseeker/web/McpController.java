@@ -1,9 +1,9 @@
-package com.example.mcp.web;
+package org.wesuper.liteai.bridge.javaseeker.web;
 
-import com.example.mcp.analysis.AnalysisResult;
-import com.example.mcp.analysis.CodeAnalysisService;
-import com.example.mcp.project.ProjectLoaderService;
-import com.example.mcp.project.ProjectSource;
+import org.wesuper.liteai.bridge.javaseeker.analysis.AnalysisResult;
+import org.wesuper.liteai.bridge.javaseeker.analysis.CodeAnalysisService;
+import org.wesuper.liteai.bridge.javaseeker.project.ProjectLoaderService;
+import org.wesuper.liteai.bridge.javaseeker.project.ProjectSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

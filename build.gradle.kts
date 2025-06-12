@@ -7,7 +7,7 @@ import org.gradle.kotlin.dsl.the // Required for extensions.getByType
 val libs = the<LibrariesForLibs>()
 
 plugins {
-    alias(libs.plugins.spring.boot) apply false // Using alias from libs
+    alias(libs.plugins.org.springframework.boot) apply false // Using alias from libs
     java // Basic Java plugin
     `java-library` // For defining API and implementation configurations
     idea // For IntelliJ IDEA project files

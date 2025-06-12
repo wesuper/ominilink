@@ -1,9 +1,9 @@
-package com.example.mcp.analysis;
+package org.wesuper.liteai.bridge.javaseeker.analysis;
 
-import com.example.mcp.project.ProjectSource;
+import org.wesuper.liteai.bridge.javaseeker.project.ProjectSource;
 import org.springframework.stereotype.Service;
 import spoon.Launcher;
-import spoon.CtModel;
+import spoon.reflect.CtModel;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtType;
@@ -11,7 +11,6 @@ import spoon.reflect.reference.CtExecutableReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.compiler.SpoonProgress;
-import spoon.support.compiler.Environment.ComplianceLevel;
 
 
 import java.io.File;
@@ -297,7 +296,7 @@ public class SpoonAnalysisService implements CodeAnalysisService {
             if (filePath.contains(".jar" + File.separator) || filePath.endsWith(".jar")) { // Check if path indicates it's from a JAR
                  // Try to get a meaningful name for the JAR
                 referencedSourceKey = Paths.get(filePath).getFileName().toString();
-                if(referencedSourceKey.matches(".*-[0-9].*\.jar")) { // Heuristic for typical maven jar names like artifact-version.jar
+                if(referencedSourceKey.matches(".*-[0-9].*\\.jar")) { // Heuristic for typical maven jar names like artifact-version.jar
                     referencedSourceKey = "dependency:" + referencedSourceKey.substring(0, referencedSourceKey.lastIndexOf('-'));
                 } else {
                     referencedSourceKey = "dependency:" + referencedSourceKey;

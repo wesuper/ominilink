@@ -9,22 +9,22 @@ The JavaSeeker MCP server is built using Java 21, Spring Boot 3.x, and Spoon for
 
 **Key Components:**
 
-1.  **`McpController` (`com.example.mcp.web.McpController`)**:
+1.  **`McpController` (`org.wesuper.liteai.bridge.javaseeker.web.McpController`)**:
     *   Exposes a REST API endpoint (`/api/mcp/analyze`) to receive analysis requests.
     *   Handles incoming requests, validates parameters, and orchestrates the analysis workflow.
 
-2.  **`ProjectLoaderService` (`com.example.mcp.project.ProjectLoaderService`)**:
+2.  **`ProjectLoaderService` (`org.wesuper.liteai.bridge.javaseeker.project.ProjectLoaderService`)**:
     *   Manages the loading and caching of Java projects.
     *   Supports loading projects from:
         *   **Local Directories**: Specified by a file system path.
         *   **Git Repositories**: Specified by a Git URL and an optional branch name. (Uses JGit for cloning).
     *   `ProjectSource` (interface), `LocalProjectSource`, `GitProjectSource` (implementations) define the abstraction for project sources.
 
-3.  **`CodeAnalysisService` (`com.example.mcp.analysis.CodeAnalysisService`)**:
+3.  **`CodeAnalysisService` (`org.wesuper.liteai.bridge.javaseeker.analysis.CodeAnalysisService`)**:
     *   Interface for code analysis operations.
     *   `SpoonAnalysisService` is the primary implementation, utilizing the [Spoon](https://spoon.gforge.inria.fr/) library.
 
-4.  **`SpoonAnalysisService` (`com.example.mcp.analysis.SpoonAnalysisService`)**:
+4.  **`SpoonAnalysisService` (`org.wesuper.liteai.bridge.javaseeker.analysis.SpoonAnalysisService`)**:
     *   Parses the specified Java project to build an AST.
     *   Locates the AST node corresponding to the input `codeSnippet`.
     *   Traverses the AST to find:
