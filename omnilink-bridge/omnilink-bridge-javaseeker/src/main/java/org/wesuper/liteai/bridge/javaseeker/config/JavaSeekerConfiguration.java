@@ -1,4 +1,4 @@
-package com.omnilink.bridge.javaseeker.config;
+package org.wesuper.liteai.bridge.javaseeker.config;
 
 import org.springframework.context.annotation.Configuration;
 

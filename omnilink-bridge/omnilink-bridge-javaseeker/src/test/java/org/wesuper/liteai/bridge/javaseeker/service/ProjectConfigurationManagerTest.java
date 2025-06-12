@@ -1,7 +1,7 @@
-package com.omnilink.bridge.javaseeker.service;
+package org.wesuper.liteai.bridge.javaseeker.service;
 
-import com.omnilink.bridge.javaseeker.config.ProjectEntry;
-import com.omnilink.bridge.javaseeker.config.ProjectConfigs; // Added import
+import org.wesuper.liteai.bridge.javaseeker.config.ProjectEntry;
+import org.wesuper.liteai.bridge.javaseeker.config.ProjectConfigs; // Added import
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;

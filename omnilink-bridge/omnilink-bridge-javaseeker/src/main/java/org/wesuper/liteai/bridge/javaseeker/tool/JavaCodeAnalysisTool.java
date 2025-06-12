@@ -1,8 +1,8 @@
-package com.omnilink.bridge.javaseeker.tool;
+package org.wesuper.liteai.bridge.javaseeker.tool;
 
-import com.omnilink.bridge.javaseeker.config.ProjectEntry;
-import com.omnilink.bridge.javaseeker.model.AnalysisReference;
-import com.omnilink.bridge.javaseeker.service.ProjectConfigurationManager;
+import org.wesuper.liteai.bridge.javaseeker.config.ProjectEntry;
+import org.wesuper.liteai.bridge.javaseeker.model.AnalysisReference;
+import org.wesuper.liteai.bridge.javaseeker.service.ProjectConfigurationManager;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

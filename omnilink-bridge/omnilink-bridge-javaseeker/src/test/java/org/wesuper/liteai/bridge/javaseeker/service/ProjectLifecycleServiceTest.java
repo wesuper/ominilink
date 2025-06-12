@@ -1,6 +1,6 @@
-package com.omnilink.bridge.javaseeker.service;
+package org.wesuper.liteai.bridge.javaseeker.service;
 
-import com.omnilink.bridge.javaseeker.config.ProjectEntry;
+import org.wesuper.liteai.bridge.javaseeker.config.ProjectEntry;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PullResult;
 import org.eclipse.jgit.api.Status;

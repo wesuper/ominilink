@@ -1,4 +1,4 @@
-package com.omnilink.bridge.javaseeker;
+package org.wesuper.liteai.bridge.javaseeker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * like project lifecycle management.
  * </p>
  */
-@SpringBootApplication(scanBasePackages = {"com.omnilink.bridge.javaseeker"})
+@SpringBootApplication(scanBasePackages = {"org.wesuper.liteai.bridge.javaseeker"})
 @EnableScheduling
 public class McpJavaSeekerApplication {
 

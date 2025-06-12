@@ -1,9 +1,9 @@
-package com.omnilink.bridge.javaseeker.service;
+package org.wesuper.liteai.bridge.javaseeker.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.omnilink.bridge.javaseeker.config.ProjectConfigs;
-import com.omnilink.bridge.javaseeker.config.ProjectEntry;
+import org.wesuper.liteai.bridge.javaseeker.config.ProjectConfigs;
+import org.wesuper.liteai.bridge.javaseeker.config.ProjectEntry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

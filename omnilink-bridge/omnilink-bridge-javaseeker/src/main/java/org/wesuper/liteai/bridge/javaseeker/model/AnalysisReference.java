@@ -1,4 +1,4 @@
-package com.omnilink.bridge.javaseeker.model;
+package org.wesuper.liteai.bridge.javaseeker.model;
 
 import java.util.Objects;
 

@@ -9,7 +9,7 @@ plugins {
 }
 
 application {
-    mainClass.set("com.omnilink.bridge.javaseeker.McpJavaSeekerApplication")
+    mainClass.set("org.wesuper.liteai.bridge.javaseeker.McpJavaSeekerApplication")
 }
 
 dependencies {
