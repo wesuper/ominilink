@@ -1,138 +1,126 @@
-# Omnilink Bridge - JavaSeeker MCP Server (Headless SSE)
+# Omnilink Bridge - JavaSeeker Module
 
-The `omnilink-bridge-javaseeker` module provides a headless Model Code Provider (MCP) server designed for advanced code analysis of Java projects. It leverages Abstract Syntax Tree (AST) parsing via the Spoon library to identify and extract code contexts for references related to a specified code snippet (class or method). This service operates without a traditional web server and streams analysis results exclusively via WebFlux-powered Server-Sent Events (SSE). Project configurations are managed dynamically through an external YAML file.
+The JavaSeeker module is a headless, reactive Model Code Provider (MCP) server designed for deep Java code analysis. It integrates with Large Language Models (LLMs) by exposing its analysis capabilities as a Spring AI Tool, communicating via Server-Sent Events (SSE).
 
-## Architecture Overview
+## 1. Architecture Overview
 
-The JavaSeeker MCP server is built using Java 21, Spring Boot 3.x (in headless mode), Spring AI, and Spoon.
+JavaSeeker operates as a fully headless Spring Boot application. Key architectural features include:
 
-**Key Components:**
+*   **Reactive MCP Server**: Built using `spring-ai-mcp-webflux`, enabling a reactive, streaming API suitable for LLM interactions. It does not use traditional REST controllers or servlets.
+*   **Spring AI Tool**: The core code analysis functionality is exposed as a function callable by LLMs, using the `@Tool` annotation from the Spring AI framework.
+*   **Dynamic Project Configuration**: Project sources for analysis are managed via an external YAML file (`javaseeker-projects.yml`). The service monitors this file for changes and dynamically reloads configurations without requiring a restart.
+*   **Automated Project Lifecycle**: The module automatically manages the lifecycle of configured Java projects, including cloning/pulling from Git, compiling dependencies, and tracking their status.
 
-1.  **`McpJavaSeekerApplication` (`com.omnilink.bridge.javaseeker.McpJavaSeekerApplication`)**:
-    *   The main Spring Boot application class, configured to run with `WebApplicationType.NONE` (headless).
-    *   Enables component scanning and scheduling.
+## 2. Configuration (`javaseeker-projects.yml`)
 
-2.  **`ProjectConfigurationManager` (`com.omnilink.bridge.javaseeker.service.ProjectConfigurationManager`)**:
-    *   Manages the list of analyzable Java projects via an external YAML file (default: `javaseeker-projects.yml`).
-    *   Loads and parses the YAML file at startup.
-    *   Monitors the YAML file for changes at runtime and dynamically updates project configurations without requiring an application restart.
-    *   Resolves `localCachePath` for projects and ensures these directories exist.
-
-3.  **`ProjectLifecycleService` (`com.omnilink.bridge.javaseeker.service.ProjectLifecycleService`)**:
-    *   Manages the lifecycle of projects defined in `javaseeker-projects.yml`.
-    *   **Syncing**: For `git` projects, clones new repositories or pulls updates for existing ones into their `localCachePath` using JGit. Updates project status (e.g., `SYNCING`, `FAILED_SYNC`).
-    *   **Compilation**: After syncing (for Git) or for local projects, triggers a build command (`mvn compile` or `gradle build -x test`) in the project's directory to resolve dependencies and prepare for analysis. Updates project status (e.g., `COMPILING`, `READY`, `FAILED_BUILD`).
-    *   Operates periodically via scheduled tasks.
-
-4.  **`JavaCodeAnalysisTool` (`com.omnilink.bridge.javaseeker.tool.JavaCodeAnalysisTool`)**:
-    *   The core Spring AI `@Tool` responsible for code analysis.
-    *   Accepts `projectName` and `codeSnippet` as input via a `JavaCodeReferenceRequest` record.
-    *   Verifies the project is in `READY` status using `ProjectConfigurationManager`.
-    *   Uses Spoon to parse the project's source code from its `localCachePath`.
-    *   Finds references *to* and *from* the target code snippet.
-    *   Returns a `Flux<AnalysisReference>`, streaming each found reference as an individual item.
-
-5.  **SSE Endpoint (via `spring-ai-mcp-webflux`)**:
-    *   The `spring-ai-mcp-webflux` dependency automatically exposes `@Tool`-annotated methods that return a `Flux` as Server-Sent Event (SSE) streams.
-    *   The endpoint for `JavaCodeAnalysisTool`'s `analyzeCodeReferences` method will typically be `/mcp/flux/analyzeJavaCodeReferences`.
-
-**Workflow:**
-
-1.  The `McpJavaSeekerApplication` starts.
-2.  `ProjectConfigurationManager` loads `javaseeker-projects.yml` and starts monitoring it.
-3.  `ProjectLifecycleService` periodically processes projects:
-    *   Clones/pulls Git projects.
-    *   Compiles projects to make them `READY`.
-4.  A client connects to the SSE endpoint (e.g., `/mcp/flux/analyzeJavaCodeReferences?projectName=my-project&codeSnippet=com.example.MyClass`). The request parameters are passed as query parameters for GET requests, which is the typical method for `spring-ai-mcp-webflux` Flux tools.
-5.  `JavaCodeAnalysisTool` receives the request (Spring AI maps query parameters to the `JavaCodeReferenceRequest` record).
-6.  It validates the project's status.
-7.  If `READY`, it performs Spoon AST analysis on the project's code in `localCachePath`.
-8.  Each identified `AnalysisReference` is streamed back to the client as an SSE event.
-
-## Configuration & Setup
-
-### Prerequisites
-
-*   Java Development Kit (JDK) 21 or newer.
-*   Git client (for cloning repositories by the service).
-*   Maven and/or Gradle installed and available on the system path if projects managed by this service require them for compilation and don't have wrappers (`mvnw`/`gradlew`).
-
-### Project Configuration File (`javaseeker-projects.yml`)
-
-The service requires a configuration file named `javaseeker-projects.yml` to define the Java projects to be analyzed.
+The primary configuration for JavaSeeker is the `javaseeker-projects.yml` file.
 
 *   **Location**:
-    *   If a file specified by the `javaseeker.config.file` Spring property (default: `javaseeker-projects.yml`) exists as an absolute path, it will be used directly.
-    *   Otherwise, the service attempts to copy `javaseeker-projects.yml` from the classpath to a directory named `.` (relative to where the application is run) and uses that external copy.
-    *   If not found in classpath, an empty default `javaseeker-projects.yml` is created in the `.` directory.
-*   **Dynamic Reloading**: The external `javaseeker-projects.yml` is monitored for changes, and configurations are reloaded automatically.
+    *   On first run, if `javaseeker-projects.yml` is present in the application's classpath (e.g., under `src/main/resources`), it will be copied to the application's working directory.
+    *   If not found in the classpath, an empty default file will be created in the working directory.
+    *   The application then monitors the `javaseeker-projects.yml` file in the working directory for any changes.
+*   **Purpose**: This file defines all Java projects that the JavaSeeker service can analyze. Modifications (additions, removals, changes to existing projects) are detected and applied dynamically.
 
-**Schema for `javaseeker-projects.yml`:**
+### Schema
+
+The YAML file structure consists of a root `projects` list, where each item defines a project:
 
 ```yaml
 projects:
-  - name: "project-alpha-service"        # Unique identifier for the project
-    sourceType: "git"                     # Type of source: "git" or "local"
-    location: "https://github.com/your-org/project-alpha.git" # Git URL or local file path
-    branch: "main"                        # Optional: Git branch to checkout
-    localCachePath: ".cache/project-alpha" # Path to store/access the project. Relative paths are resolved from app's CWD.
-                                          # Defaults to ./.cache/<project-name> if not specified.
-    status: "NOT_SYNCED"                  # Initial status (managed by the service, typically "NOT_SYNCED" for new git projects)
-                                          # Lifecycle: NOT_SYNCED -> SYNCING -> COMPILING -> READY / FAILED (or FAILED_SYNC, FAILED_BUILD etc.)
-  - name: "legacy-beta-library"
-    sourceType: "local"
-    location: "/mnt/legacy/beta-lib"      # Absolute path to the local project
-    localCachePath: "/mnt/legacy/beta-lib"  # For local, can be same as location if no separate cache needed
-    status: "READY"                       # Local projects might be initially READY or need compilation
+  - name: "unique-project-name"        # (Required) A unique identifier for the project.
+    sourceType: "git"                  # (Required) Type of the project source. Options: "git", "local".
+    location: "https://github.com/your-org/project.git" # (Required)
+                                       # For "git": The repository URL.
+                                       # For "local": Absolute or relative file system path to the project.
+    branch: "main"                     # (Optional) For "git" sources. Specifies the branch to use.
+                                       # Defaults to the repository's default branch if omitted.
+    localCachePath: ".cache/project-name" # (Optional) Path to cache/store the project locally.
+                                       # If relative, resolved against the app's working directory.
+                                       # Defaults to "./.cache/<project-name>" if omitted.
+                                       # For "local" sourceType, if 'location' is absolute and this is omitted,
+                                       # 'location' is used directly.
+    status: "NOT_SYNCED"               # (Internal) Managed by the service. Tracks the project's current state.
+                                       # User should generally not set this manually.
 ```
-**Note on `localCachePath`**: If a relative path is provided, it will be resolved relative to the current working directory of the application. It's recommended to use absolute paths or ensure the application is run from a consistent location. The application will attempt to create this directory if it doesn't exist.
 
-### Running the Service
+### Field Explanations:
 
-1.  Ensure `javaseeker-projects.yml` is configured and accessible as described above.
-2.  Build the module:
-    ```bash
-    ./gradlew :omnilink-bridge:omnilink-bridge-javaseeker:bootJar
+*   `name`: A unique string identifying the project. Used when requesting analysis.
+*   `sourceType`:
+    *   `git`: The project source is a Git repository.
+    *   `local`: The project source is a directory on the local file system.
+*   `location`:
+    *   If `sourceType` is `git`, this is the HTTPS or SSH URL of the Git repository.
+    *   If `sourceType` is `local`, this is the file system path to the project's root directory.
+*   `branch`: (Optional, for `git` type only) The specific Git branch to clone or pull from.
+*   `localCachePath`: The directory where the project's source code will be stored and processed. For `git` projects, this is where the repository is cloned. For `local` projects, this usually points to the same `location` or can be omitted if `location` is absolute. The service ensures this path is an absolute path.
+*   `status`: (Read-only for users) Indicates the current state of the project within the JavaSeeker service. See "Project Lifecycle" below.
+
+## 3. Project Lifecycle and Statuses
+
+The JavaSeeker service manages each configured project through several lifecycle states. The `status` field in `javaseeker-projects.yml` (though primarily managed internally) reflects this state. Only projects in the `READY` state are available for analysis.
+
+*   **`NOT_SYNCED`**: Initial state for a new project or a project that needs to be re-processed.
+*   **`SYNCING`**: For `git` projects, the service is currently cloning the repository or pulling updates.
+*   **`FAILED_SYNC`**: A Git operation (clone/pull) failed due to network issues, authentication problems, or other Git errors.
+*   **`FAILED_MERGE_CONFLICT`**: A `git pull` resulted in merge conflicts that require manual intervention in the `localCachePath`.
+*   **`COMPILING`**: The project source code (after syncing for Git projects, or directly for local projects) is being compiled (e.g., `mvn dependency:copy-dependencies compile` or `gradle build -x test`). This step resolves dependencies.
+*   **`FAILED_BUILD`**: The compilation command (Maven/Gradle) failed. Check service logs for build errors.
+*   **`FAILED_BUILD_TIMEOUT`**: The compilation command exceeded the allowed time limit.
+*   **`FAILED_BUILD_EXCEPTION`**: An unexpected error occurred while trying to execute the build command.
+*   **`READY_NO_BUILD_FILE`**: For both `git` and `local` projects, if no `pom.xml` or `build.gradle[.kts]` is found in the root of `localCachePath`. The project's source code is available, but dependencies are not compiled automatically. Analysis might be limited.
+*   **`READY`**: The project is successfully synced (if applicable) and compiled. It is ready for code analysis.
+*   **`FAILED_INVALID_PATH`**: For `local` projects, the specified `location` does not exist or is not a directory.
+*   **`FAILED_UNEXPECTED_ERROR`**: An unexpected error occurred during the project's lifecycle processing.
+
+The service periodically checks and updates project states.
+
+## 4. API Usage (Tool Invocation)
+
+JavaSeeker exposes its code analysis capabilities as a Spring AI Tool that can be invoked by an LLM.
+
+*   **Tool Name**: `analyzeJavaCodeReferences`
+
+*   **Input Request**:
+    The LLM should provide a JSON object with the following fields:
+    *   `projectName` (string): The unique name of the project to analyze (must match a `name` in `javaseeker-projects.yml` and the project must be in `READY` state).
+    *   `codeSnippet` (string): The code element to analyze. This can be:
+        *   A fully qualified class name (e.g., `"com.example.MyClass"`)
+        *   A fully qualified method signature (e.g., `"com.example.MyClass#myMethod(java.lang.String,int)"`). Parameter types should be fully qualified or simple names if unambiguous (e.g., `String`, `int`).
+
+    Example Request JSON:
+    ```json
+    {
+      "projectName": "example-spring-petclinic",
+      "codeSnippet": "org.springframework.samples.petclinic.vet.VetController#showVetList(int, java.util.Map)"
+    }
     ```
-3.  Run the application:
-    ```bash
-    java -jar omnilink-bridge/omnilink-bridge-javaseeker/build/libs/omnilink-bridge-javaseeker-*.jar
+
+*   **Output Stream (Server-Sent Events - SSE)**:
+    The tool returns a reactive stream (`Flux`) of Server-Sent Events (SSE). Each event in the stream is a JSON object representing a single found code reference (`AnalysisReference`). The LLM should process this stream as events arrive.
+
+*   **`AnalysisReference` JSON Object Structure**:
+    Each JSON event will have the following structure:
+    *   `sourceKey` (string): Indicates the origin of the referencing or referenced code.
+        *   `"self"`: The code is part of the analyzed project itself.
+        *   `"jdk"`: The code is part of the Java Development Kit (e.g., `java.lang.String`).
+        *   `"dependency:some-library.jar"`: The code comes from a dependency JAR (e.g., `dependency:spring-webmvc.jar`). Version numbers are typically normalized from the JAR filename.
+    *   `fqn` (string): The fully qualified name of the class or method signature of the reference.
+    *   `codeContext` (string): A snippet of the source code of the block (method or class) that contains the reference. This provides context to the LLM.
+    *   `type` (string): The direction of the reference relative to the `codeSnippet` provided in the request:
+        *   `"TO"`: The `codeContext` (and its `fqn`) makes a call *to* or uses the `codeSnippet`.
+        *   `"FROM"`: The `codeSnippet` makes a call *from* itself to the `fqn` described in this reference, and `codeContext` is the source code of the `codeSnippet` itself.
+
+    Example `AnalysisReference` JSON event:
+    ```json
+    {
+      "sourceKey": "self",
+      "fqn": "org.springframework.samples.petclinic.owner.OwnerController#processFindForm(org.springframework.samples.petclinic.owner.Owner, org.springframework.validation.BindingResult, java.util.Map)",
+      "codeContext": "public String processFindForm(@Valid Owner owner, BindingResult result, Map<String, Object> model) { ... owner.getLastName() ... }",
+      "type": "TO"
+    }
     ```
-    (The exact JAR name might vary based on version. Check the `build/libs` directory.)
+    (Another event might be for a reference of type "FROM")
 
-## API Usage (Server-Sent Events - SSE)
-
-The primary way to interact with the service is by connecting to its Server-Sent Events (SSE) endpoint. The `spring-ai-mcp-webflux` framework automatically exposes `@Tool` methods that return a `Flux` as SSE streams.
-
-**Endpoint for `analyzeJavaCodeReferences` tool:**
-
-`GET /mcp/flux/analyzeJavaCodeReferences`
-
-**Query Parameters (for GET requests):**
-
-*   `projectName` (String, required): The unique name of the project (must match a name in `javaseeker-projects.yml`).
-*   `codeSnippet` (String, required): The fully qualified class name or method signature to analyze (e.g., `com.example.MyClass` or `com.example.MyClass#myMethod(String,int)`).
-
-**Example Interaction (using `curl` for GET):**
-
-```bash
-curl -N "http://localhost:8080/mcp/flux/analyzeJavaCodeReferences?projectName=project-alpha-service&codeSnippet=com.example.TargetService%23process"
+This comprehensive README should provide users and LLMs with the necessary information to configure and use the JavaSeeker module.
 ```
-*(Note: Default Spring Boot port is 8080. Adjust if your application runs on a different port. `#` in `codeSnippet` should be URL-encoded to `%23` for GET requests.)*
-
-**SSE Event Format:**
-
-Each event in the stream will be a JSON object representing an `AnalysisReference`:
-
-```
-event: message
-data: {"source":"self","fullyQualifiedName":"com.example.another.SomeOtherClass#someMethod()","codeContext":"public void someMethod() { /* ... code ... */ }","referenceType":"TO"}
-```
-*(The actual `data:` line will be a single line of JSON. The above is formatted for readability.)*
-
-*   `source` (String): `"self"`, `"dependency:<jar_name>"`, or `"jdk"`.
-*   `fullyQualifiedName` (String): FQN of the class/method associated with the reference.
-*   `codeContext` (String): Full source code of the method or class.
-*   `referenceType` (String): `"TO"` (points to the analysis target) or `"FROM"` (points from the analysis target).
-
-The stream will send multiple such events, one for each reference found. The stream completes when the analysis is finished for the requested snippet. If an error occurs (e.g., project not ready, target not found), the SSE stream might terminate with an error event or close prematurely.

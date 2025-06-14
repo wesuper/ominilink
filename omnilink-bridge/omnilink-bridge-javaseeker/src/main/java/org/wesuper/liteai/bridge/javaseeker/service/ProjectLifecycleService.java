@@ -202,7 +202,7 @@ public class ProjectLifecycleService {
         if (Files.exists(projectPath.resolve("pom.xml"))) {
             String mvnExecutable = Files.exists(projectPath.resolve(isWindows ? "mvnw.cmd" : "mvnw")) ?
                                    (isWindows ? "mvnw.cmd" : "./mvnw") : "mvn";
-            buildCommand = mvnExecutable + " clean compile -DskipTests";
+            buildCommand = mvnExecutable + " clean dependency:copy-dependencies compile -DskipTests";
         } else if (Files.exists(projectPath.resolve("build.gradle")) || Files.exists(projectPath.resolve("build.gradle.kts"))) {
             String gradleExecutable = Files.exists(projectPath.resolve(isWindows ? "gradlew.bat" : "gradlew")) ?
                                       (isWindows ? "gradlew.bat" : "./gradlew") : "gradle";

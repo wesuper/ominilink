@@ -67,9 +67,16 @@ public class ProjectConfigurationManager {
     private long lastModifiedTime = 0L;
 
     /**
-     * Initializes the ProjectConfigurationManager.
-     * It determines the location of the configuration file (external or classpath),
-     * copies it if necessary, and performs an initial load of configurations.
+     * Initializes the ProjectConfigurationManager upon bean construction.
+     * This method determines the effective location of the {@code javaseeker-projects.yml}
+     * configuration file. If the path specified by {@code javaseeker.config.file}
+     * is absolute and exists, it's used directly. Otherwise, it attempts to locate
+     * the file in the classpath. If found in the classpath, it's copied to an
+     * external location (relative to the application's working directory) to allow
+     * for runtime modifications. If the file is not found in either location, a default
+     * empty configuration file is created at the external location.
+     * After establishing the configuration file path, an initial load of project
+     * configurations is performed.
      */
     @PostConstruct
     public void init() {
@@ -213,8 +220,12 @@ public class ProjectConfigurationManager {
     }
 
     /**
-     * Retrieves an unmodifiable list of all currently loaded project configurations.
-     * @return A list of {@link ProjectEntry} objects.
+     * Retrieves a copy of the list of all currently loaded project configurations.
+     * The returned list is a snapshot and is safe to iterate over, but modifications
+     * to the list itself will not affect the underlying configuration map.
+     * Project entries within the list are the actual managed instances.
+     * @return A new {@link ArrayList} containing all {@link ProjectEntry} objects.
+     *         Returns an empty list if no projects are configured.
      */
     public List<ProjectEntry> getAllProjects() {
         lock.lock();
@@ -226,19 +237,24 @@ public class ProjectConfigurationManager {
     }
 
     /**
-     * Retrieves a specific project configuration by its name.
-     * @param name The unique name of the project.
-     * @return An {@link Optional} containing the {@link ProjectEntry} if found, or an empty Optional.
+     * Retrieves a specific project configuration by its unique name.
+     * @param name The unique name of the project to retrieve. Must not be null.
+     * @return An {@link Optional} containing the {@link ProjectEntry} if a project
+     *         with the given name exists, otherwise an empty {@link Optional}.
      */
     public Optional<ProjectEntry> getProject(String name) {
         return Optional.ofNullable(projectConfigMap.get(name)); // ConcurrentHashMap allows safe reads
     }
 
     /**
-     * Updates the in-memory status of a specified project.
-     * This change is not persisted back to the YAML file.
-     * @param projectName The name of the project to update.
-     * @param status The new status string.
+     * Updates the in-memory lifecycle status of a specified project.
+     * This method is thread-safe. The change in status is not persisted
+     * back to the {@code javaseeker-projects.yml} file; it only affects the
+     * current runtime state of the project entry managed by this service.
+     *
+     * @param projectName The unique name of the project whose status is to be updated. Must not be null.
+     * @param status The new status string to set for the project (e.g., "COMPILING", "READY", "FAILED_SYNC").
+     *               It's up to the caller to ensure the status string is valid.
      */
     public void updateProjectStatus(String projectName, String status) {
         lock.lock();
