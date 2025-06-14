@@ -19,6 +19,7 @@ import spoon.reflect.CtModel;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtType;
+import spoon.reflect.code.CtStatement; // Added import
 import spoon.reflect.reference.CtExecutableReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.filter.TypeFilter;
@@ -412,10 +413,41 @@ public class JavaCodeAnalysisTool {
             // If this is the target itself (e.g. recursive call), we still want to capture it.
             // if (actualReferencedDeclaration != null && actualReferencedDeclaration.equals(analyzedTargetElement)) return;
 
-            String targetContextString = (analyzedTargetElement instanceof CtType) ? analyzedTargetElement.toString() :
-                                       (analyzedTargetElement instanceof CtExecutable) ? analyzedTargetElement.toString() : "";
+            String fromContextString = "";
+            CtElement contextProvider = referenceUsageLocation.getParent(CtStatement.class);
+            if (contextProvider != null) {
+                fromContextString = contextProvider.toString();
+            } else {
+                // Fallback if not directly within a statement (e.g., field initializer referring to a static method)
+                // Try to get the closest executable or type as context, but not the entire analyzed target if it's very large.
+                contextProvider = referenceUsageLocation.getParent(p -> p instanceof CtExecutable || p instanceof CtType);
+                if (contextProvider != null && contextProvider.equals(analyzedTargetElement)) {
+                    // If the direct parent block is the analyzed element itself,
+                    // we still want a more specific context if possible.
+                    // For now, as a simpler fallback, use the reference itself and a bit of its parent structure.
+                    // This part might need more refinement if specific examples show it's insufficient.
+                    CtElement parentOfRef = referenceUsageLocation.getParent();
+                    if (parentOfRef != null) {
+                         fromContextString = parentOfRef.toString();
+                         if (fromContextString.length() > 500) { // Limit context length for very large parents
+                            fromContextString = referenceUsageLocation.toString() + " (in context of " + ( (parentOfRef instanceof CtType) ? ((CtType)parentOfRef).getQualifiedName() : ( (parentOfRef instanceof CtExecutable) ? ((CtExecutable)parentOfRef).getSignature() : parentOfRef.getShortRepresentation() ) ) + ")";
+                         }
+                    } else {
+                        fromContextString = referenceUsageLocation.toString();
+                    }
 
-            newRef = new AnalysisReference(sourceKeyOfReferencedElement, fqnOfReferencedElement, targetContextString, "FROM");
+                } else if (contextProvider != null) {
+                    fromContextString = contextProvider.toString();
+                } else {
+                    fromContextString = analyzedTargetElement.toString(); // Ultimate fallback
+                }
+            }
+            // Ensure context string is not excessively large, as a general safeguard
+            if (fromContextString.length() > 2000) {
+                 fromContextString = fromContextString.substring(0, 1997) + "...";
+            }
+
+            newRef = new AnalysisReference(sourceKeyOfReferencedElement, fqnOfReferencedElement, fromContextString, "FROM");
         }
 
         if (newRef != null && uniqueReferences.add(newRef)) {

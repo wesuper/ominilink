@@ -109,7 +109,7 @@ JavaSeeker exposes its code analysis capabilities as a Spring AI Tool that can b
     *   `codeContext` (string): A snippet of the source code of the block (method or class) that contains the reference. This provides context to the LLM.
     *   `type` (string): The direction of the reference relative to the `codeSnippet` provided in the request:
         *   `"TO"`: The `codeContext` (and its `fqn`) makes a call *to* or uses the `codeSnippet`.
-        *   `"FROM"`: The `codeSnippet` makes a call *from* itself to the `fqn` described in this reference, and `codeContext` is the source code of the `codeSnippet` itself.
+        *   `"FROM"`: The `codeSnippet` (i.e., the analyzed element) makes a call *from* itself to the `fqn` described in this reference. The `codeContext` for a "FROM" reference is a specific snippet from the `codeSnippet` (e.g., the statement making the call) rather than the entire source of the `codeSnippet`.
 
     Example `AnalysisReference` JSON event:
     ```json
